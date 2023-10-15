@@ -1,3 +1,10 @@
+---installation
+ionic start erpmobile tabs --type=angular --capacitor
+ionic capacitor add android
+
 ---template
 https://cdn.cms-twdigitalassets.com/content/dam/blog-twitter/official/fr_fr/products/2017/refresh/Twitter-Refresh-Walkthrough.gif
 https://static-prod.adweek.com/wp-content/uploads/2017/09/TwitterLiteAndroidHero.jpg
+
+
+---configuration avant androi
