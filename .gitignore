@@ -68,3 +68,6 @@ testem.log
 .DS_Store
 Thumbs.db
 /android
+/node_modules
+/www
+/.vscode
