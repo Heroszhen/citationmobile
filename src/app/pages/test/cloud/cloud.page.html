@@ -1,0 +1,17 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>cloud</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div [routerLink]="['/']" class="pointer ion-padding">go to Accueil</div>
+
+  <ion-list lines="inset" class="ion-margin-top">
+    <ion-item *ngFor="let item of folder">
+      <ion-label>{{item.Key}}</ion-label>
+      <div>{{item.LastModified | date:'dd/MM/yyyy hh:mm:ss'}}</div>
+    </ion-item>
+    
+  </ion-list>
+</ion-content>

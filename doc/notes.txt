@@ -8,3 +8,21 @@ https://static-prod.adweek.com/wp-content/uploads/2017/09/TwitterLiteAndroidHero
 
 
 ---configuration avant androi
+
+
+---use aws sdk
+1) Please update /src/polyfills.ts by adding:
+
+// aws-sdk requires global to exist
+(window as any).global = window;
+2) then update compilerOptions object located in /src/tsconfig.app.json with:
+"types": ["node"]
+npm install --save-dev @types/node
+3) Install aws-sdk:
+npm install aws-sdk
+4) now you should be able to use AWS SDK in your *.ts file:
+import * as AWS from 'aws-sdk';
+5)ajouter CORS dans Autorisations du compartiment
+
+---guard
+ionic g guard test
