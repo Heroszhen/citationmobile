@@ -1,3 +1,30 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-menu swipeGesture="false" side="start" contentId="ion-menu-content" menuId="mainmenu"  id="main-menu" >
+    <ion-content>
+      <ion-list>
+        <ion-menu-toggle>
+          <ion-item [routerLink]="['/']" routerLinkActive="active" routerDirection="forward">
+            <ion-icon name="home" slot="start"></ion-icon>
+            <ion-label>Accueil</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        
+        <ion-item>Menu Item</ion-item>
+        <ion-item>Menu Item</ion-item>
+        <ion-item>Menu Item</ion-item>
+
+        <ion-list-header>
+          <h4 class="title">Test</h4>
+        </ion-list-header>
+        <ion-menu-toggle *ngIf="!isProduction">
+          <ion-item [routerLink]="['/test/cloud']" routerLinkActive="active" routerDirection="forward">
+            <ion-icon name="cloud-outline" slot="start"></ion-icon>
+            <ion-label>Cloud</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+    </ion-list>
+    </ion-content>
+  </ion-menu>
+  
+  <ion-router-outlet id="ion-menu-content"></ion-router-outlet>
 </ion-app>

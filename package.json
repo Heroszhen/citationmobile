@@ -4,13 +4,14 @@
   "author": "Ionic Framework",
   "homepage": "https://ionicframework.com/",
   "scripts": {
-    "serve": "ionic serve --open",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
+    "serve": "ionic serve --open",
+    "ionic_build": "ionic build --prod",
     "live": "ionic cap sync && ionic capacitor run android -l --external --open"
   },
   "private": true,
