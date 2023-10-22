@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { IUser } from '../interfaces/general';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +9,7 @@ export class StoreService {
   isConnected$ = new BehaviorSubject<Array<boolean|null>>([null]);
   toLoad$ = new BehaviorSubject<Array<boolean>>([false]); 
   platform$ = new BehaviorSubject<Array<string>>(['']);
+  user$ = new BehaviorSubject<Array<IUser|null>>([null]);
 
   constructor() { }
 

@@ -16,3 +16,12 @@ export interface BeforeInstallPromptEvent extends Event {
     }>;
     prompt(): Promise<void>;
 }
+
+export interface IUser {
+    firstname:string,
+    lastname:string,
+    email:string,
+    photo: {name:string, url:string},
+    roles: string[],
+    created:string
+}

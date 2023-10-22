@@ -66,6 +66,9 @@
           <ion-row class="height-full ion-align-items-center">
             <ion-col>
               <form #loginform="ngForm" (ngSubmit)="login()" id="login-form">
+                <h2 class="ion-text-center font-weight-bold">
+                  <strong>Connectez-vous à Citation</strong>
+                </h2>
                 <ion-list>
                   <ion-item lines="full">
                     <ion-input labelPlacement="floating" type="email" name="email" #email="ngModel" [(ngModel)]="loginM['email']" required>
