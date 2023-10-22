@@ -14,6 +14,10 @@ const routes: Routes = [
   },  {
     path: 'cloud',
     loadChildren: () => import('./pages/cloud/cloud.module').then( m => m.CloudPageModule)
+  },
+  {
+    path: 'contact',
+    loadChildren: () => import('./pages/contact/contact.module').then( m => m.ContactPageModule)
   }
 
 ];

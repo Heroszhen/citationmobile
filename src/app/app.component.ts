@@ -22,6 +22,7 @@ export class AppComponent implements OnInit {
   modal:number|null = null;
   loginM:Login = new Login();
   loader:any = null;
+  pf:string = "";
 
   constructor(
     private readonly platform: Platform,
@@ -32,6 +33,7 @@ export class AppComponent implements OnInit {
   ) {}
 
   async ngOnInit(): Promise<void> {
+    this.getPlatForm();
     this.storeService.checkConnection();
     this.storeService.isConnected$.subscribe((data:Array<boolean|null>) => {
       this.isConnected = data[0];
@@ -44,6 +46,14 @@ export class AppComponent implements OnInit {
       if (data[0])this.loader.present();
       else this.loader.dismiss();
     });
+  }
+
+  getPlatForm(): void {
+    /** "ios" | "ipad" | "iphone" | "android" | "phablet" | "tablet" | "cordova" | "capacitor" | "electron" | "pwa" | "mobile" | "mobileweb" | "desktop" | "hybrid" */
+    if (this.platform.is('android'))this.pf = "android";
+    else if (this.platform.is('ios'))this.pf = "ios";
+    else this.pf = "web";
+    this.storeService.platform$.next([this.pf]);
   }
 
   switchModal(modal:number|null): void {
