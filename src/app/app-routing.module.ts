@@ -11,7 +11,11 @@ const routes: Routes = [
     path: 'test/cloud',
     loadChildren: () => import('./pages/test/cloud/cloud.module').then( m => m.CloudPageModule),
     canActivate:[TestGuard]
+  },  {
+    path: 'cloud',
+    loadChildren: () => import('./pages/cloud/cloud.module').then( m => m.CloudPageModule)
   }
+
 ];
 @NgModule({
   imports: [

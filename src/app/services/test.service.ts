@@ -8,7 +8,7 @@ import { HeadObjectOutput } from 'aws-sdk/clients/s3';
 @Injectable({
   providedIn: 'root'
 })
-export class TestService extends BaseService{
+export class TestService extends BaseService {
   client: aws.S3;
 
   constructor(http: HttpClient) { 

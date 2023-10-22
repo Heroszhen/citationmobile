@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl: "",
+  baseUrl: "https://citation-nodejs-api.onrender.com",
   aws_s3_accessKeyId:"AKIAVE4EF2SKA3VCBMZZ",
   aws_s3_secretAccessKey:"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",
   aws_s3_bucket:"citationcloud"

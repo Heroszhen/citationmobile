@@ -34,7 +34,8 @@ export abstract class BaseService {
       headers: new HttpHeaders({
         'Authorization': `Bearer ${localStorage.getItem("token")}`,
         'X-Requested-With': 'XMLHttpRequest',
-        'ngsw-bypass': ''
+        'ngsw-bypass': '',
+        'Content-Type': 'application/json'
       })
     };
 

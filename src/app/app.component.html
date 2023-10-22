@@ -1,5 +1,5 @@
 <ion-app>
-  <ion-menu swipeGesture="false" side="start" contentId="ion-menu-content" menuId="mainmenu"  id="main-menu" >
+  <ion-menu swipeGesture="false" side="start" contentId="ion-menu-content" menuId="mainmenu"  id="main-menu">
     <ion-content>
       <ion-list>
         <ion-menu-toggle>
@@ -8,12 +8,28 @@
             <ion-label>Accueil</ion-label>
           </ion-item>
         </ion-menu-toggle>
-        
-        <ion-item>Menu Item</ion-item>
-        <ion-item>Menu Item</ion-item>
-        <ion-item>Menu Item</ion-item>
+        <ion-menu-toggle>
+          <ion-item [routerLink]="['/cloud']" routerLinkActive="active" routerDirection="forward">
+            <ion-icon name="cloud-outline" slot="start"></ion-icon>
+            <ion-label>Cloud</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item [routerLink]="['/']" routerLinkActive="active" routerDirection="forward">
+            <ion-icon name="mail-outline" slot="start"></ion-icon>
+            <ion-label>Contact</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-item class="pointer" *ngIf="isConnected===false" (click)="switchModal(1)">
+          <ion-icon name="log-in-outline" slot="start"></ion-icon>
+          <ion-label>Connexion</ion-label>
+        </ion-item>
+        <ion-item class="pointer" *ngIf="isConnected===true">
+          <ion-icon name="log-out-outline" slot="start"></ion-icon>
+          <ion-label>Déconnexion</ion-label>
+        </ion-item>
 
-        <ion-list-header>
+        <ion-list-header class="ion-margin-top">
           <h4 class="title">Test</h4>
         </ion-list-header>
         <ion-menu-toggle *ngIf="!isProduction">
@@ -27,4 +43,51 @@
   </ion-menu>
   
   <ion-router-outlet id="ion-menu-content"></ion-router-outlet>
+
+  <ion-modal [isOpen]="modal===1">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Connexion</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="switchModal(null)">Fermer</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding ion-align-items-center">
+        <ion-grid class="height-full">
+          <ion-row class="height-full ion-align-items-center">
+            <ion-col>
+              <form #loginform="ngForm" (ngSubmit)="login()" id="login-form">
+                <ion-list>
+                  <ion-item lines="full">
+                    <ion-input labelPlacement="floating" type="email" name="email" #email="ngModel" [(ngModel)]="loginM['email']" required>
+                      <div slot="label" >Mail <ion-text color="danger"> *</ion-text></div>
+                    </ion-input>
+                  </ion-item>
+                  <ion-item lines="full">
+                    <ion-input labelPlacement="floating" type="password" name="password" #password="ngModel" [(ngModel)]="loginM['password']" required>
+                      <div slot="label" >Mot de passe <ion-text color="danger"> *</ion-text></div>
+                    </ion-input>
+                  </ion-item>
+                  <div class="ion-margin-top">
+                    <ion-button expand="block" type="submit" [disabled]="loginform.form.invalid">Envoyer</ion-button> 
+                  </div>
+                  <div class="ion-margin-top">
+                    <ion-button expand="block" type="button" color="warning">Mot de passe oublié</ion-button> 
+                  </div>
+                  <div class="ion-margin-top ion-text-center">
+                    <ion-button shape="round" color="dark">
+                      <ion-icon name="finger-print-outline"></ion-icon>
+                    </ion-button>
+                  </div>
+                </ion-list>
+              </form>
+            </ion-col>
+          </ion-row>
+          
+        </ion-grid>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 </ion-app>
