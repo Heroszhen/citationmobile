@@ -31,7 +31,7 @@
           <ion-icon name="log-out-outline" slot="start"></ion-icon>
           <ion-label>Déconnexion</ion-label>
         </ion-item>
-        <ion-item class="pointer" *ngIf="pf==='web'">
+        <ion-item class="pointer" *ngIf="pf==='web' && deferredPrompt !== null" (click)="installApp()">
           <ion-icon name="desktop-outline" slot="start"></ion-icon>
           <ion-label>Installer</ion-label>
         </ion-item>

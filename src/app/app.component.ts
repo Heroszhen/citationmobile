@@ -5,6 +5,12 @@ import { StoreService } from './services/store.service';
 import { MenuController } from '@ionic/angular';
 import { ApiService } from './services/api.service';
 import { ILogin } from './interfaces/general';
+import { BeforeInstallPromptEvent } from './interfaces/general';
+declare global {
+  interface WindowEventMap {
+    beforeinstallprompt: BeforeInstallPromptEvent;
+  }
+}
 
 class Login {
   email:string = "";
@@ -23,6 +29,7 @@ export class AppComponent implements OnInit {
   loginM:Login = new Login();
   loader:any = null;
   pf:string = "";
+  deferredPrompt:BeforeInstallPromptEvent|null = null;
 
   constructor(
     private readonly platform: Platform,
@@ -34,6 +41,13 @@ export class AppComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.getPlatForm();
+    if (this.pf === "web") {
+      window.addEventListener(
+        'beforeinstallprompt',
+        this.onBeforeInstallPrompt.bind(this)
+      );
+    }
+
     this.storeService.checkConnection();
     this.storeService.isConnected$.subscribe((data:Array<boolean|null>) => {
       this.isConnected = data[0];
@@ -71,12 +85,31 @@ export class AppComponent implements OnInit {
         this.storeService.toLoad$.next([false]);
         if (data["status"] === 1) {
           localStorage.setItem("token", data["data"]);
-          
         } 
       },
       error:(err)=>{
         this.storeService.toLoad$.next([false]);
       }
     });
+  }
+
+  onBeforeInstallPrompt(event: BeforeInstallPromptEvent): void {
+    //console.log('🚀 onBeforeInstallPrompt');
+    // Prevent the mini-info bar from appearing on mobile
+    event?.preventDefault();
+    // Stash the event so it can be triggered later.
+    this.deferredPrompt = event;
+  }
+
+  async installApp(): Promise<void> {
+    //console.log('install', this.deferredPrompt);
+    if (!this.deferredPrompt) {
+      return;
+    }
+    this.deferredPrompt.prompt();
+    const {outcome: outcome, platform:platform} = await this.deferredPrompt.userChoice;
+    if (outcome === "accepted") {
+      this.deferredPrompt = null;
+    }
   }
 }
