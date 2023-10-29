@@ -2,6 +2,9 @@ ion-app {
     max-width:600px;
     margin:0 auto;
     #main-menu {
+        img {
+            width:24px;
+        }
         .active {
             color: var(--ion-color-primary);
             font-weight: bold;

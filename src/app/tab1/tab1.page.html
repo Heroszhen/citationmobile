@@ -4,17 +4,47 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
-      Citations
+      <div class="ion-text-center">Citations</div>
+      <ion-searchbar 
+        placeholder="Rechercher...." 
+        [(ngModel)]="keywords" 
+        (ionChange)="getCitations()" 
+        (ionClear)="clearKeywords()"
+      ></ion-searchbar>
     </ion-title>
+    <div slot="end" class="ion-padding-end wrap-pencil">
+      <ion-icon name="pencil-outline"></ion-icon>
+    </div>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="ion-padding">
+  <app-citation></app-citation>
+  <ion-list id="list-citations">
+    <ng-container *ngFor="let item of citations">
+      <app-citation [citation]="item"></app-citation>
+    </ng-container>
+    
+    <!-- <ion-item *ngFor="let item of citations">
+      <ion-avatar slot="start" *ngIf="item['citation']['user'] !== null && item['citation']['user']['photo']['name'] !== ''">
+        <img [src]="item['citation']['user']['photo']['url']" alt="" />
+      </ion-avatar>
+      <ion-avatar slot="start" *ngIf="item['citation']['user'] === null || item['citation']['user']['photo']['name'] === ''">
+        <ion-icon name="person-circle-outline"></ion-icon>
+      </ion-avatar>
+      <ion-label>
+        <h2 class="user-name" *ngIf="item['citation']['user'] !== null">{{item['citation']['user']['lastname']}} {{item['citation']['user']['firstname']}}</h2>
+        <h4 class="created">{{item['citation']['created'] | date:'dd/MM/YYYY hh:mm:ss'}}</h4>
+        <section [innerHTML]="item['citation']['message']" class="wrap-message"></section>
+        <section class="wrap-nbcomments">
+          <div>
+            <ion-icon name="chatbubble-outline" class="icon"></ion-icon>
+            <div>{{item['nbComments']}}</div>
+          </div>
+        </section>
+      </ion-label>
+    </ion-item> -->
+  </ion-list>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <!-- <app-explore-container name="Tab 1 page"></app-explore-container> -->
 </ion-content>

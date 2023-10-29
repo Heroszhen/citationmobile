@@ -10,6 +10,7 @@ export class StoreService {
   toLoad$ = new BehaviorSubject<Array<boolean>>([false]); 
   platform$ = new BehaviorSubject<Array<string>>(['']);
   user$ = new BehaviorSubject<Array<IUser|null>>([null]);
+  isServerFree$ = new BehaviorSubject<Array<Boolean>>([false]);
 
   constructor() { }
 

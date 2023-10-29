@@ -1,3 +1,5 @@
+import { Citation } from "../models/citation";
+
 export interface IData {
     status:number,
     data:any
@@ -18,10 +20,21 @@ export interface BeforeInstallPromptEvent extends Event {
 }
 
 export interface IUser {
+    _id:string,
     firstname:string,
     lastname:string,
     email:string,
     photo: {name:string, url:string},
     roles: string[],
     created:string
+}
+
+export interface ICitation {
+    citation: Citation,
+    nbComments: number
+}
+
+export interface IDataCitations {
+    status:number,
+    data:ICitation[]
 }

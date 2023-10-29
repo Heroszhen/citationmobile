@@ -6,6 +6,8 @@ ionic capacitor add android
 https://cdn.cms-twdigitalassets.com/content/dam/blog-twitter/official/fr_fr/products/2017/refresh/Twitter-Refresh-Walkthrough.gif
 https://static-prod.adweek.com/wp-content/uploads/2017/09/TwitterLiteAndroidHero.jpg
 
+https://nokiapoweruser.com/twitter-android-updated-ui-changes-changelog/
+
 
 ---configuration avant androi
 

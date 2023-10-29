@@ -20,7 +20,8 @@ export abstract class BaseService {
     this.httpOptionsAuth = {
       headers: new HttpHeaders({
         'Authorization': `Bearer ${localStorage.getItem('token')}`,
-        'X-Requested-With': 'XMLHttpRequest'
+        'X-Requested-With': 'XMLHttpRequest',
+        'Content-Type': 'application/json'
       })
     };
 

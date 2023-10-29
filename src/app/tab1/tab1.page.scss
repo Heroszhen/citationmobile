@@ -1,0 +1,11 @@
+ion-header {
+    .wrap-pencil {
+        font-size:20px;
+        cursor: pointer;
+    }
+    .wrap-pencil:hover,
+    .wrap-pencil:active{
+        font-weight: bold;
+        color: var(--ion-color-primary);
+    }
+}

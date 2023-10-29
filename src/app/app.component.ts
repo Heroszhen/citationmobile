@@ -4,8 +4,9 @@ import { environment } from 'src/environments/environment';
 import { StoreService } from './services/store.service';
 import { MenuController } from '@ionic/angular';
 import { ApiService } from './services/api.service';
-import { ILogin } from './interfaces/general';
+import { IData, ILogin } from './interfaces/general';
 import { BeforeInstallPromptEvent } from './interfaces/general';
+
 declare global {
   interface WindowEventMap {
     beforeinstallprompt: BeforeInstallPromptEvent;
@@ -40,22 +41,25 @@ export class AppComponent implements OnInit {
   ) {}
 
   async ngOnInit(): Promise<void> {
+    this.loader = await this.loadingCtrl.create({
+      spinner: "circles"
+    });
+
     this.getPlatForm();
     if (this.pf === "web") {
       window.addEventListener(
         'beforeinstallprompt',
         this.onBeforeInstallPrompt.bind(this)
       );
-    }
+    }  
+    
+    await this.checkServer();
 
     this.storeService.checkConnection();
     this.storeService.isConnected$.subscribe((data:Array<boolean|null>) => {
       this.isConnected = data[0];
     });
 
-    this.loader = await this.loadingCtrl.create({
-      spinner: "circles"
-    });
     this.storeService.toLoad$.subscribe((data:Array<boolean>) => {
       if (data[0])this.loader.present();
       else this.loader.dismiss();
@@ -68,6 +72,25 @@ export class AppComponent implements OnInit {
     else if (this.platform.is('ios'))this.pf = "ios";
     else this.pf = "web";
     this.storeService.platform$.next([this.pf]);
+  }
+
+  async checkServer(): Promise<void> {
+    return new Promise((resolve,reject) => {
+      this.loader.present();
+      this.apiService.getCheckServer().subscribe({
+        next: (data:IData)=>{
+          this.loader.dismiss();
+          if (data["status"] === 1) {
+            this.storeService.isServerFree$.next([true]);
+          } 
+          resolve();
+        },
+        error:(err)=>{
+          this.loader.dismiss();
+          resolve();
+        }
+      });
+    });
   }
 
   switchModal(modal:number|null): void {
