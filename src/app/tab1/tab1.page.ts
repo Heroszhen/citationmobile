@@ -3,6 +3,7 @@ import { ICitation, IDataCitations, IUser } from '../interfaces/general';
 import { Subscription } from 'rxjs';
 import { StoreService } from '../services/store.service';
 import { ApiService } from '../services/api.service';
+import { ScrollDetail } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab1',
@@ -16,7 +17,9 @@ export class Tab1Page {
   pageItem:number = 1;
   keywords:string = "";
   citations:ICitation[] = [];
-  
+  canCharge:boolean = true;
+  citationsSubscriber:Subscription|null = null;
+
   constructor(
     private readonly storeService:StoreService,
     private readonly apiService:ApiService
@@ -45,7 +48,8 @@ export class Tab1Page {
   }
 
   async getCitations(): Promise<void> {
-    this.apiService.getGetCitations(this.pageItem, this.keywords).subscribe({
+    this.canCharge = false;
+    this.citationsSubscriber = this.apiService.getGetCitations(this.pageItem, this.keywords).subscribe({
       next: (data:IDataCitations)=>{
         if (data["status"] === 1) {
           if (data["data"].length !== 0) {
@@ -53,21 +57,48 @@ export class Tab1Page {
             this.citations = this.citations.concat(data["data"]);
           }
         }
+        this.canCharge = true;
       },
       error:(err)=>{
-       
+       this.canCharge = true;
       }
     });
   }
 
+  async searchByKeywords(): Promise<void> {
+    this.citationsSubscriber?.unsubscribe();
+    this.citations = [];
+    this.pageItem = 1;
+    await this.getCitations();
+  }
 
-  clearKeywords(): void {
+  async clearKeywords(): Promise<void> {
     if (this.keywords !== "") {
       this.pageItem = 1;
       this.keywords = "";
       this.citations = [];
-      this.getCitations();
+      await this.getCitations();
     }
+  }
+
+  async handleScroll(event: CustomEvent<ScrollDetail>): Promise<void> {
+    let scrollTop:number = event.detail.scrollTop;
+    let scrollHeight:number = (event.target as HTMLElement).scrollHeight;
+    let listCitations:HTMLElement = document.querySelector("#list-citations") as HTMLElement;
+    if (scrollTop + scrollHeight - 80 >= listCitations.offsetHeight && this.canCharge) {
+      await this.getCitations()
+    }
+  }
+
+  handleRefresh(event:any): void {
+    setTimeout(async () => {
+      event.target.complete();
+      if (this.canCharge) {
+        this.citations = [];
+        this.pageItem = 1;
+        await this.getCitations()
+      }
+    }, 1000);
   }
 
 }
