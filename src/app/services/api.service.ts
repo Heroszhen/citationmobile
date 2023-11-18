@@ -14,11 +14,15 @@ export class ApiService extends BaseService {
   }
 
   getCheckServer(): Observable<IData> {
-    return this.http.get<ILogin>(`${this.baseUrl}/api/check-server`);
+    return this.http.get<IData>(`${this.baseUrl}/api/check-server`);
   }
 
   postLogin(data:object): Observable<ILogin> {
     return this.http.post<ILogin>(`${this.baseUrl}/api/login`, JSON.stringify(data), this.getHttpOptionsAuth());
+  }
+
+  getGetLoginProfile(): Observable<IData> {
+    return this.http.get<IData>(`${this.baseUrl}/api/get-login-profile`, this.getHttpOptionsAuth());
   }
 
   getGetCitations(pageItem:number, keywords:string = ""): Observable<IDataCitations> {

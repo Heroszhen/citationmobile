@@ -61,12 +61,13 @@ export class AppComponent implements OnInit {
     await this.checkServer();
 
     this.storeService.checkConnection();
-    this.storeService.isConnected$.subscribe((data:Array<boolean|null>) => {
+    this.storeService.isConnected$.subscribe(async (data:Array<boolean|null>) => {
       this.isConnected = data[0];
+      if (this.isConnected === true)await this.getLoginProfile();
     });
 
     this.storeService.toLoad$.subscribe((data:Array<boolean>) => {
-      if (data[0])this.loader.present();
+      if (data[0] === true)this.loader.present();
       else this.loader.dismiss();
     });
   }
@@ -113,6 +114,8 @@ export class AppComponent implements OnInit {
         this.storeService.toLoad$.next([false]);
         if (data["status"] === 1) {
           localStorage.setItem("token", data["data"]);
+          this.storeService.isConnected$.next([true]);
+          this.switchModal(null);
         } 
       },
       error:(err)=>{
@@ -139,5 +142,25 @@ export class AppComponent implements OnInit {
     if (outcome === "accepted") {
       this.deferredPrompt = null;
     }
+  }
+
+  deconnect():void {
+    localStorage.removeItem("token");
+    this.storeService.isConnected$.next([false]);
+  }
+
+  async getLoginProfile(): Promise<void> {
+    this.apiService.getGetLoginProfile().subscribe({
+      next: (data:IData)=>{
+        if (data["status"] === 1) {
+         this.storeService.user$.next([data["data"]]);
+        } else {
+          this.deconnect();
+        }
+      },
+      error:(err)=>{
+        this.deconnect();
+      }
+    });
   }
 }

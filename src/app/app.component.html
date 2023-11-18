@@ -27,7 +27,7 @@
           <ion-icon name="log-in-outline" slot="start"></ion-icon>
           <ion-label>Connexion</ion-label>
         </ion-item>
-        <ion-item class="pointer" *ngIf="isConnected===true">
+        <ion-item class="pointer" *ngIf="isConnected===true" (click)="deconnect()">
           <ion-icon name="log-out-outline" slot="start"></ion-icon>
           <ion-label>Déconnexion</ion-label>
         </ion-item>
