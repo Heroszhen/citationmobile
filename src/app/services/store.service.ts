@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { IUser } from '../interfaces/general';
+import { ICitation, IUser } from '../interfaces/general';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +11,7 @@ export class StoreService {
   platform$ = new BehaviorSubject<Array<string>>(['']);
   user$ = new BehaviorSubject<Array<IUser|null>>([null]);
   isServerFree$ = new BehaviorSubject<Array<Boolean>>([false]);
+  citations$ = new BehaviorSubject<Array<ICitation>>([]);
 
   constructor() { }
 

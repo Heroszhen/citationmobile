@@ -6,6 +6,7 @@ import { MenuController } from '@ionic/angular';
 import { ApiService } from './services/api.service';
 import { IData, ILogin } from './interfaces/general';
 import { BeforeInstallPromptEvent } from './interfaces/general';
+import { Router } from '@angular/router';
 
 declare global {
   interface WindowEventMap {
@@ -37,13 +38,17 @@ export class AppComponent implements OnInit {
     private storeService: StoreService,
     private readonly menuController: MenuController,
     private readonly loadingCtrl: LoadingController,
-    private readonly apiService: ApiService
+    private readonly apiService: ApiService,
+    private readonly router: Router
   ) {}
 
   async ngOnInit(): Promise<void> {
     this.loader = await this.loadingCtrl.create({
       spinner: "circles"
     });
+
+    this.storeService.isServerFree$.next([false]);
+    this.router.navigate(["/attendre-render-com-server"]);
 
     this.getPlatForm();
     if (this.pf === "web") {
