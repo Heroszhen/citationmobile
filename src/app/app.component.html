@@ -6,7 +6,7 @@
       </ion-list-header>
       <ion-list>
         <ion-menu-toggle>
-          <ion-item [routerLink]="['/']" routerDirection="forward">
+          <ion-item [routerLink]="['/tab1']" routerDirection="forward">
             <ion-icon name="home" slot="start"></ion-icon>
             <ion-label>Accueil</ion-label>
           </ion-item>
@@ -56,6 +56,24 @@
   </ion-menu>
   
   <ion-router-outlet id="ion-menu-content"></ion-router-outlet>
+  <ion-tabs>
+    <ion-tab-bar slot="bottom" >
+      <ion-tab-button [routerLink]="['/tab1']" routerDirection="forward" routerLinkActive="active tab-selected">
+        <ion-icon name="earth-outline"></ion-icon>
+        <ion-label>Citations</ion-label>
+      </ion-tab-button>
+  
+      <ion-tab-button [routerLink]="['/tab2']" routerDirection="forward" routerLinkActive="active tab-selected">
+        <ion-icon name="search-outline"></ion-icon>
+        <ion-label>Rechercher</ion-label>
+      </ion-tab-button>
+  
+      <ion-tab-button [routerLink]="['/tab3']" routerDirection="forward" routerLinkActive="active tab-selected">
+        <ion-icon name="person-circle-outline"></ion-icon>
+        <ion-label>Moi</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
 
   <ion-modal [isOpen]="modal===1">
     <ng-template>

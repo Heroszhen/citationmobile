@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ICitation, IDataCitations, IUser } from '../interfaces/general';
 import { Subscription } from 'rxjs';
 import { StoreService } from '../services/store.service';
@@ -10,7 +10,7 @@ import { ScrollDetail } from '@ionic/angular';
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss']
 })
-export class Tab1Page {
+export class Tab1Page implements OnInit{
   subscribers: Subscription[] = [];
   user:IUser|null = null;
 
@@ -24,6 +24,8 @@ export class Tab1Page {
     private readonly storeService:StoreService,
     private readonly apiService:ApiService
   ) {}
+
+  ngOnInit() {}
 
   ionViewWillEnter(): void {
     this.pageItem = 1;
@@ -42,6 +44,10 @@ export class Tab1Page {
 
     this.subscribers.push(subscriberUser, subscriberServer);
   }
+
+  ionViewDidEnter(){}
+
+  ionViewWillLeave(){}
 
   ionViewDidLeave(): void {
     for (let entry of this.subscribers) entry.unsubscribe();

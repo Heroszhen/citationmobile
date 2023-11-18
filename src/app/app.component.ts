@@ -32,6 +32,7 @@ export class AppComponent implements OnInit {
   loader:any = null;
   pf:string = "";
   deferredPrompt:BeforeInstallPromptEvent|null = null;
+  currentRoute:string = "";
 
   constructor(
     private readonly platform: Platform,
@@ -48,7 +49,7 @@ export class AppComponent implements OnInit {
     });
 
     this.storeService.isServerFree$.next([false]);
-    this.router.navigate(["/attendre-render-com-server"]);
+    //this.router.navigate(["/attendre-render-com-server"]);
 
     this.getPlatForm();
     if (this.pf === "web") {
