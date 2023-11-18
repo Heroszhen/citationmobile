@@ -13,7 +13,7 @@
       ></ion-searchbar>
     </ion-title>
     <div slot="end" class="ion-padding-end wrap-pencil">
-      <ion-icon name="pencil-outline" *ngIf="user !== null"></ion-icon>
+      <ion-icon name="pencil-outline" *ngIf="user !== null" (click)="modal=true"></ion-icon>
     </div>
   </ion-toolbar>
 </ion-header>
@@ -40,5 +40,19 @@
     </ng-container>
   </ion-list>
 
-  <!-- <app-explore-container name="Tab 1 page"></app-explore-container> -->
+  <ion-modal [isOpen]="modal===true">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Ajouter une citation</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="modal=false">Fermer</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <app-editor></app-editor>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 </ion-content>

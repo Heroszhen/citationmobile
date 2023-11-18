@@ -3,7 +3,7 @@ import { ICitation, IDataCitations, IUser } from '../interfaces/general';
 import { Subscription } from 'rxjs';
 import { StoreService } from '../services/store.service';
 import { ApiService } from '../services/api.service';
-import { ScrollDetail } from '@ionic/angular';
+import { LoadingController, ScrollDetail } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab1',
@@ -19,10 +19,12 @@ export class Tab1Page implements OnInit{
   citations:ICitation[] = [];
   canCharge:boolean = true;
   citationsSubscriber:Subscription|null = null;
+  modal:boolean = false;
 
   constructor(
     private readonly storeService:StoreService,
-    private readonly apiService:ApiService
+    private readonly apiService:ApiService,
+    private readonly loadingCtrl: LoadingController,
   ) {}
 
   ngOnInit() {}
@@ -106,5 +108,4 @@ export class Tab1Page implements OnInit{
       }
     }, 1000);
   }
-
 }

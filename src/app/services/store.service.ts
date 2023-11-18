@@ -6,8 +6,7 @@ import { ICitation, IUser } from '../interfaces/general';
   providedIn: 'root'
 })
 export class StoreService {
-  isConnected$ = new BehaviorSubject<Array<boolean|null>>([null]);
-  toLoad$ = new BehaviorSubject<Array<boolean>>([false]); 
+  isConnected$ = new BehaviorSubject<Array<boolean|null>>([null]); 
   platform$ = new BehaviorSubject<Array<string>>(['']);
   user$ = new BehaviorSubject<Array<IUser|null>>([null]);
   isServerFree$ = new BehaviorSubject<Array<Boolean>>([false]);

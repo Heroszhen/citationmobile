@@ -7,6 +7,7 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
 
 import { Tab1PageRoutingModule } from './tab1-routing.module';
 import { CitationComponent } from '../components/citation/citation.component';
+import { EditorComponent } from '../components/editor/editor.component';
 
 @NgModule({
   imports: [
@@ -16,7 +17,7 @@ import { CitationComponent } from '../components/citation/citation.component';
     ExploreContainerComponentModule,
     Tab1PageRoutingModule
   ],
-  declarations: [Tab1Page, CitationComponent],
+  declarations: [Tab1Page, CitationComponent, EditorComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class Tab1PageModule {}

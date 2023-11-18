@@ -49,7 +49,7 @@ export class AppComponent implements OnInit {
     });
 
     this.storeService.isServerFree$.next([false]);
-    //this.router.navigate(["/attendre-render-com-server"]);
+    this.router.navigate(["/attendre-render-com-server"]);
 
     this.getPlatForm();
     if (this.pf === "web") {
@@ -65,11 +65,6 @@ export class AppComponent implements OnInit {
     this.storeService.isConnected$.subscribe(async (data:Array<boolean|null>) => {
       this.isConnected = data[0];
       if (this.isConnected === true)await this.getLoginProfile();
-    });
-
-    this.storeService.toLoad$.subscribe((data:Array<boolean>) => {
-      if (data[0] === true)this.loader.present();
-      else this.loader.dismiss();
     });
   }
 
@@ -109,10 +104,8 @@ export class AppComponent implements OnInit {
   }
 
   login(): void {
-    this.storeService.toLoad$.next([true]);
     this.apiService.postLogin(this.loginM).subscribe({
       next: (data:ILogin)=>{
-        this.storeService.toLoad$.next([false]);
         if (data["status"] === 1) {
           localStorage.setItem("token", data["data"]);
           this.storeService.isConnected$.next([true]);
@@ -120,7 +113,6 @@ export class AppComponent implements OnInit {
         } 
       },
       error:(err)=>{
-        this.storeService.toLoad$.next([false]);
       }
     });
   }

@@ -20,7 +20,7 @@ export class RendercomPage implements OnInit {
   ionViewWillEnter(): void {
     let subscriberFreeServer:Subscription = this.storeService.isServerFree$.subscribe((data:Array<Boolean>) => {
       if (data[0]) {
-        this.router.navigate(["/"]);
+        this.router.navigate(["/tab1"]);
       }
     });
     this.subscribers.push(subscriberFreeServer);
