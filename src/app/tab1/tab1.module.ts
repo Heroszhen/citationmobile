@@ -8,6 +8,7 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
 import { Tab1PageRoutingModule } from './tab1-routing.module';
 import { CitationComponent } from '../components/citation/citation.component';
 import { EditorComponent } from '../components/editor/editor.component';
+import { QuillModule } from 'ngx-quill';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { EditorComponent } from '../components/editor/editor.component';
     CommonModule,
     FormsModule,
     ExploreContainerComponentModule,
-    Tab1PageRoutingModule
+    Tab1PageRoutingModule,
+    QuillModule
   ],
   declarations: [Tab1Page, CitationComponent, EditorComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

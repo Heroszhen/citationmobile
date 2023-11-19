@@ -32,8 +32,11 @@
     "@capacitor/keyboard": "5.0.6",
     "@capacitor/status-bar": "5.0.6",
     "@ionic/angular": "^7.0.0",
+    "@types/quill": "^1.3.7",
     "aws-sdk": "^2.1473.0",
     "ionicons": "^7.0.0",
+    "ngx-quill": "^22.0.0",
+    "quill": "^1.3.7",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"

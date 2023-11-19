@@ -1,11 +1,21 @@
-export class Citation {
+import { Model } from "./model";
+
+interface ICitationPhoto {
+    name:string,
+    url:string,
+    created:string
+};
+
+export class Citation extends Model{
     _id:string = "";
     created:string = "";
     message:string = "";
-    photo: {
-        name:string,
-        url:string
-    } | null = null;
+    photo: Array<ICitationPhoto> = [];
+    video: {
+        url: String,
+        type: Number, //1 : url, 2 : share en iframe
+        created: string
+    }| null = null;
     user: {
         _id:string,
         firstname:string,

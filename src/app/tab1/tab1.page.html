@@ -46,12 +46,12 @@
         <ion-toolbar>
           <ion-title>Ajouter une citation</ion-title>
           <ion-buttons slot="end">
-            <ion-button (click)="modal=false">Fermer</ion-button>
+            <ion-button (click)="modal=false" >Fermer</ion-button>
           </ion-buttons>
         </ion-toolbar>
       </ion-header>
       <ion-content>
-        <app-editor></app-editor>
+        <app-editor [modules]="modules" *ngIf="modal===true"></app-editor>
       </ion-content>
     </ng-template>
   </ion-modal>

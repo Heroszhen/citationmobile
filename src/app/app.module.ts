@@ -11,7 +11,6 @@ import { CUSTOM_ELEMENTS_SCHEMA, isDevMode } from '@angular/core';
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
-
 @NgModule({
   declarations: [AppComponent],
   imports: [

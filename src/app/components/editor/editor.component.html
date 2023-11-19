@@ -1,3 +1,8 @@
-<p>
-  editor works!
-</p>
+<section class="ion-padding">
+  <form #citationform="ngForm" (ngSubmit)="editCitation()" id="citation-form">
+    <quill-editor format="html" theme="snow" [styles]="{height: '200px'}" [modules]="modules" #message="ngModel" [(ngModel)]="citationM['message']" (contentChanged)="logChange($event);" name="message"></quill-editor>
+
+    <ion-button expand="block" type="submit" [disabled]="citationform.form.invalid || citationM['message']===''">Envoyer</ion-button>
+  </form>
+  
+</section>
