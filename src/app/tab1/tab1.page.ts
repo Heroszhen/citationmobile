@@ -4,6 +4,8 @@ import { Subscription } from 'rxjs';
 import { StoreService } from '../services/store.service';
 import { ApiService } from '../services/api.service';
 import { LoadingController, ScrollDetail } from '@ionic/angular';
+import { ModaleditorPage } from '../modules/modaleditor/modaleditor.page';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab1',
@@ -43,6 +45,7 @@ export class Tab1Page implements OnInit{
     private readonly storeService:StoreService,
     private readonly apiService:ApiService,
     private readonly loadingCtrl: LoadingController,
+    private modalCtrl: ModalController
   ) {}
 
   ngOnInit() {}
@@ -125,5 +128,17 @@ export class Tab1Page implements OnInit{
         await this.getCitations()
       }
     }, 1000);
+  }
+
+  async presentModal(e: Event): Promise<void>{
+    const modal = await this.modalCtrl.create({
+      component: ModaleditorPage,
+      cssClass: 'modalstyle',
+      componentProps: {
+        'modules': this.modules
+      }
+    });
+    
+    return await modal.present();
   }
 }

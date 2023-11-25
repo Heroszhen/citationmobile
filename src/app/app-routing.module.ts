@@ -40,8 +40,7 @@ const routes: Routes = [
   {
     path: 'attendre-render-com-server',
     loadChildren: () => import('./pages/rendercom/rendercom.module').then( m => m.RendercomPageModule)
-  }
-
+  },
 ];
 @NgModule({
   imports: [

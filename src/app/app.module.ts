@@ -10,7 +10,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, isDevMode } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
-
+import { ModaleditorPageModule } from './modules/modaleditor/modaleditor.module';
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -24,7 +24,8 @@ import { ServiceWorkerModule } from '@angular/service-worker';
       // Register the ServiceWorker as soon as the application is stable
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
-    })
+    }),
+    ModaleditorPageModule
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

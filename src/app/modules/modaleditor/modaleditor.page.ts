@@ -1,13 +1,15 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Citation } from 'src/app/models/citation';
 import { readFile } from 'src/app/utils/generalUtil';
+import { ModalController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-editor',
-  templateUrl: './editor.component.html',
-  styleUrls: ['./editor.component.scss'],
+  selector: 'app-modaleditor',
+  templateUrl: './modaleditor.page.html',
+  styleUrls: ['./modaleditor.page.scss'],
 })
-export class EditorComponent  implements OnInit {
+export class ModaleditorPage implements OnInit {
+
   @Input() modules:any = {
     toolbar: [
       ['bold', 'italic', 'underline', 'strike'],
@@ -36,7 +38,7 @@ export class EditorComponent  implements OnInit {
   videoSection:boolean = false;
   @ViewChild('inputfile') inputFile: ElementRef<HTMLInputElement>;
 
-  constructor() {}
+  constructor(private modalCtr: ModalController) {}
 
   ngOnInit(): void {
     if (this.citation !== undefined) {
@@ -65,5 +67,11 @@ export class EditorComponent  implements OnInit {
 
   editCitation(): void {
     console.log(this.citationM, this.videoUrl, this.videoType)
+  }
+
+  closeModal(): void {
+    this.modalCtr.dismiss({
+      'dismissed': true
+    });
   }
 }

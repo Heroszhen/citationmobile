@@ -1,0 +1,59 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Editer une citation</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">Fermer</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <section id="citation-editor" class="ion-padding">
+    <section class="wrap-icons">
+      <ion-icon name="image-outline" (click)="imageSection=true"></ion-icon>
+      <ion-icon name="camera-reverse-outline"></ion-icon>
+      <ion-icon name="logo-youtube" (click)="videoSection=true"></ion-icon>
+      <ion-icon name="happy-outline"></ion-icon>
+      <ion-icon name="location-outline"></ion-icon>
+    </section>
+    <form #citationform="ngForm" (ngSubmit)="editCitation()" id="citation-form">
+      <quill-editor format="html" theme="snow" [styles]="{height: '150px'}" [modules]="modules" #message="ngModel" [(ngModel)]="citationM['message']" (contentChanged)="logChange($event);" name="message"></quill-editor>
+  
+      <section *ngIf="imageSection===true">
+        <h4>Image</h4>
+        <ion-button shape="round" expand="block" color="secondary" (click)="inputFile.nativeElement.click()">
+          <ion-icon name="images-outline"></ion-icon>
+        </ion-button>
+        <input type="file" class="d-none" #inputfile (change)="handleFile($event.target)">
+        <div *ngIf="fileUrl !== ''" class="ion-margin-top">
+          <img src="{{fileUrl}}" alt="">
+        </div>
+      </section>
+  
+      <section *ngIf="videoSection===true" id="section-video">
+        <h4>Video</h4>
+        <div>
+          <ion-select
+            class="always-flip"
+            toggleIcon="caret-down-sharp"
+            interface="popover"
+            label="Type"
+            placeholder=""
+            name="video-type"
+            #type="ngModel" 
+            [(ngModel)]="videoType"
+          >
+            <ion-select-option value="1">Url</ion-select-option>
+            <ion-select-option value="2">Iframe</ion-select-option>
+          </ion-select>
+        </div>
+        <div>
+          <ion-textarea label="Lien" placeholder="" name="video-url" #url="ngModel" [(ngModel)]="videoUrl"></ion-textarea>
+        </div>
+      </section>
+  
+      <ion-button expand="block" type="submit" [disabled]="citationform.form.invalid || citationM['message']===''" class="ion-margin-top">Envoyer</ion-button>
+    </form>
+    
+  </section>
+</ion-content>
