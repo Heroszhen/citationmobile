@@ -38,3 +38,8 @@ export interface IDataCitations {
     status:number,
     data:ICitation[]
 }
+
+export interface IDataCitation {
+    status:number,
+    data:ICitation
+}

@@ -6,6 +6,7 @@ import { ApiService } from '../services/api.service';
 import { LoadingController, ScrollDetail } from '@ionic/angular';
 import { ModaleditorPage } from '../modules/modaleditor/modaleditor.page';
 import { ModalController } from '@ionic/angular';
+import { Citation } from '../models/citation';
 
 @Component({
   selector: 'app-tab1',
@@ -135,10 +136,18 @@ export class Tab1Page implements OnInit{
       component: ModaleditorPage,
       cssClass: 'modalstyle',
       componentProps: {
-        'modules': this.modules
+        'modules': this.modules,
+        'action': 1
       }
     });
-    
-    return await modal.present();
+
+    modal.onDidDismiss().then((data) => {
+      if (data.data) {
+        let citation:Citation = data.data.citation;
+        console.log(citation)
+      }
+    });
+
+    await modal.present();
   }
 }

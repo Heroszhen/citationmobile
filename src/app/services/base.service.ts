@@ -30,14 +30,17 @@ export abstract class BaseService {
     };
   }
 
-  getHttpOptionsAuth(options:object = null!): object {
+  getHttpOptionsAuth(options:object|null = null, isFormData:boolean = false): object {
+    let headers:HttpHeaders = new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem("token")}`,
+      'X-Requested-With': 'XMLHttpRequest',
+      'ngsw-bypass': '',
+    })
+    if (!isFormData)headers = headers.set('Content-Type', 'application/json');
+    console.log(headers)
+
     this.httpOptionsAuth = {
-      headers: new HttpHeaders({
-        'Authorization': `Bearer ${localStorage.getItem("token")}`,
-        'X-Requested-With': 'XMLHttpRequest',
-        'ngsw-bypass': '',
-        'Content-Type': 'application/json'
-      })
+      headers: headers
     };
 
     if (options !== null)this.httpOptionsAuth = {...this.httpOptionsAuth, ...options};
