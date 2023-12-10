@@ -114,7 +114,7 @@ export class Tab1Page implements OnInit{
   async handleScroll(event: CustomEvent<ScrollDetail>): Promise<void> {
     let scrollTop:number = event.detail.scrollTop;
     let scrollHeight:number = (event.target as HTMLElement).scrollHeight;
-    let listCitations:HTMLElement = document.querySelector("#list-citations") as HTMLElement;
+    let listCitations:HTMLElement = document.querySelector(".list-citations") as HTMLElement;
     if (scrollTop + scrollHeight - 80 >= listCitations.offsetHeight && this.canCharge) {
       await this.getCitations()
     }
@@ -160,7 +160,7 @@ export class Tab1Page implements OnInit{
       component: ModalcitationPage,
       cssClass: 'modalstyle',
       componentProps: {
-        'citation': this.citations[this.elmIndex]
+        'citationId': this.citations[this.elmIndex]["citation"]["_id"]
       }
     });
 

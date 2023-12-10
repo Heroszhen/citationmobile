@@ -6,8 +6,7 @@ import { Tab1Page } from './tab1.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 
 import { Tab1PageRoutingModule } from './tab1-routing.module';
-import { CitationComponent } from '../components/citation/citation.component';
-import { EditorComponent } from '../components/editor/editor.component';
+import { SharedModule } from '../components/shared.module';
 
 @NgModule({
   imports: [
@@ -15,9 +14,10 @@ import { EditorComponent } from '../components/editor/editor.component';
     CommonModule,
     FormsModule,
     ExploreContainerComponentModule,
-    Tab1PageRoutingModule
+    Tab1PageRoutingModule,
+    SharedModule
   ],
-  declarations: [Tab1Page, CitationComponent, EditorComponent],
+  declarations: [Tab1Page],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class Tab1PageModule {}

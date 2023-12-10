@@ -1,4 +1,5 @@
 import { Citation } from "../models/citation";
+import { Comment } from "../models/comment";
 
 export interface IData {
     status:number,
@@ -42,4 +43,9 @@ export interface IDataCitations {
 export interface IDataCitation {
     status:number,
     data:ICitation
+}
+
+export interface IDataComments {
+    status:number,
+    data:Comment[]
 }

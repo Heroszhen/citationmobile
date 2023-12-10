@@ -14,7 +14,9 @@ import { ModaleditorPageModule } from './modules/modaleditor/modaleditor.module'
 import { ModalcitationPageModule } from './modules/modalcitation/modalcitation.module';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent
+  ],
   imports: [
     BrowserModule, 
     IonicModule.forRoot(), 

@@ -1,6 +1,18 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Citation</ion-title>
+    <ion-title slot="start">
+      <ion-grid *ngIf="citation !== undefined">
+        <ion-row>
+          <ion-col *ngIf="citation.citation.user !== null && citation.citation.user.photo !== null && citation.citation.user.photo.url !== ''">
+            <img src="{{citation.citation['user']['photo']['url']}}" alt="" id="user-photo">
+          </ion-col>
+          <ion-col>
+            <div>{{citation.citation.user?.lastname}}</div>
+            <div>{{citation.citation.user?.firstname}}</div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="closeModal()">
         <ion-icon name="arrow-back-circle-outline"></ion-icon>
@@ -9,18 +21,52 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding-bottom" id="modalcitation">
-  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-    <ion-fab-button>
-      <ion-icon name="chevron-up-circle"></ion-icon>
-    </ion-fab-button>
-    <ion-fab-list side="top">
+<ion-content 
+  [fullscreen]="true" 
+  id="modalcitation"
+  [scrollEvents]="true"
+  (ionScroll)="handleScroll($any($event))"
+>
+  <ng-container *ngIf="citation !== undefined">
+    <section id="modalcitation-content">
+      <ion-list class="list-citations">
+        <app-citation [citation]="citation"></app-citation>
+      </ion-list>
+      
+      <ion-list lines="full" class="list-comments">
+        <ion-item *ngFor="let item of comments;">
+          <ion-avatar slot="start" *ngIf="item['user']['photo']['name'] !== ''">
+            <img [src]="item['user']['photo']['url']" alt="" />
+          </ion-avatar>
+          <ion-avatar slot="start" *ngIf="item['user']['photo']['name'] === ''">
+            <ion-icon name="person-circle-outline"></ion-icon>
+          </ion-avatar>
+          <ion-label slot="end">
+            <h2 class="user-name">{{item['user']['lastname']}} {{item['user']['firstname']}}</h2>
+            <h4 class="created">
+              <ion-text color="medium">{{item['created'] | date:'dd/MM/YYYY hh:mm:ss'}}</ion-text>
+            </h4>
+            <section [innerHTML]="citation['citation']['message']" class="wrap-message"></section>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </section>
+
+    <ion-fab slot="fixed" vertical="bottom" horizontal="end">
       <ion-fab-button>
-        <ion-icon name="pencil-outline"></ion-icon>
+        <ion-icon name="chevron-up-circle"></ion-icon>
       </ion-fab-button>
-      <ion-fab-button>
-        <ion-icon name="trash-outline"></ion-icon>
-      </ion-fab-button>
-    </ion-fab-list>
-  </ion-fab>
+      <ion-fab-list side="top">
+        <ion-fab-button>
+          <ion-icon name="add-outline"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-button>
+          <ion-icon name="pencil-outline"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-button>
+          <ion-icon name="trash-outline"></ion-icon>
+        </ion-fab-button>
+      </ion-fab-list>
+    </ion-fab>
+  </ng-container>
 </ion-content>

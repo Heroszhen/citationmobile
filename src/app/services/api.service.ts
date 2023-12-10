@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BaseService } from './base.service';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { IData, IDataCitation, IDataCitations, ILogin } from '../interfaces/general';
+import { IData, IDataCitation, IDataCitations, IDataComments, ILogin } from '../interfaces/general';
 import { Citation } from '../models/citation';
 
 @Injectable({
@@ -36,5 +36,13 @@ export class ApiService extends BaseService {
 
   postEditCitation(data:FormData): Observable<IDataCitation> {
     return this.http.post<IDataCitation>(`${this.baseUrl}/api/citations/citation`,  data, this.getHttpOptionsAuth(null, true));
+  }
+
+  getGetCitation(id:string): Observable<IDataCitation> {
+    return this.http.get<IDataCitation>(`${this.baseUrl}/api/citations/citation/${id}`, this.getHttpOptionsAuth());
+  }
+
+  getGetCommentsByCitation(citationId:string, pageItem:number): Observable<IDataComments> {
+    return this.http.get<IDataComments>(`${this.baseUrl}/api/citations/citation/${citationId}/comments?page=${pageItem}`, this.getHttpOptionsAuth());
   }
 }

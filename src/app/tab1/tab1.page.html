@@ -33,7 +33,7 @@
   </ion-refresher-content>
 </ion-refresher>
 
-  <ion-list id="list-citations">
+  <ion-list class="list-citations">
     <ng-container *ngFor="let item of citations; let key = index;">
       <app-citation [citation]="item" (click)="openCitationModal(key)"></app-citation>
     </ng-container>
