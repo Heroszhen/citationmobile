@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ICitation } from 'src/app/interfaces/general';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-modalcitation',
@@ -6,10 +8,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./modalcitation.page.scss'],
 })
 export class ModalcitationPage implements OnInit {
+  @Input() citation:ICitation;
 
-  constructor() { }
+  constructor(
+    private modalCtr: ModalController
+  ) { }
 
   ngOnInit() {
+    console.log(this.citation)
+  }
+
+  closeModal(): void {
+    this.modalCtr.dismiss({
+      'dismissed': true
+    });
   }
 
 }

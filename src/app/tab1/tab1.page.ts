@@ -155,11 +155,17 @@ export class Tab1Page implements OnInit{
   }
 
   async openCitationModal(index:number): Promise<void> {
+    this.elmIndex = index;
     const modal = await this.modalCtrl.create({
       component: ModalcitationPage,
       cssClass: 'modalstyle',
       componentProps: {
         'citation': this.citations[this.elmIndex]
+      }
+    });
+
+    modal.onDidDismiss().then((data) => {
+      if (data.data) {
       }
     });
 
