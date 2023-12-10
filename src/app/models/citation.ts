@@ -13,7 +13,7 @@ export class Citation extends Model{
     photo: Array<ICitationPhoto> = [];
     video: {
         url: String,
-        type: Number, //1 : url, 2 : share en iframe
+        kind: Number, //1 : url, 2 : share en iframe
         created: string
     }| null = null;
     user: {

@@ -37,7 +37,6 @@ export abstract class BaseService {
       'ngsw-bypass': '',
     })
     if (!isFormData)headers = headers.set('Content-Type', 'application/json');
-    console.log(headers)
 
     this.httpOptionsAuth = {
       headers: headers

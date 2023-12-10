@@ -52,7 +52,7 @@
         </div>
       </section>
   
-      <ion-button expand="block" type="submit" [disabled]="citationform.form.invalid || citationM['message']===''" class="ion-margin-top">Envoyer</ion-button>
+      <ion-button expand="block" type="submit" [disabled]="citationform.form.invalid || citationM['message']==='' || disabledButton" class="ion-margin-top">Envoyer</ion-button>
     </form>
     
   </section>

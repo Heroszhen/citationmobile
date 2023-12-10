@@ -6,7 +6,7 @@ import { ApiService } from '../services/api.service';
 import { LoadingController, ScrollDetail } from '@ionic/angular';
 import { ModaleditorPage } from '../modules/modaleditor/modaleditor.page';
 import { ModalController } from '@ionic/angular';
-import { Citation } from '../models/citation';
+import { ModalcitationPage } from '../modules/modalcitation/modalcitation.page';
 
 @Component({
   selector: 'app-tab1',
@@ -23,7 +23,7 @@ export class Tab1Page implements OnInit{
   canCharge:boolean = true;
   citationsSubscriber:Subscription|null = null;
   modal:boolean = false;
-
+  elmIndex:number = -1;
   modules = {
     toolbar: [
       ['bold', 'italic', 'underline', 'strike'],        
@@ -143,8 +143,23 @@ export class Tab1Page implements OnInit{
 
     modal.onDidDismiss().then((data) => {
       if (data.data) {
-        let citation:Citation = data.data.citation;
-        console.log(citation)
+        if (data.data.citation !== null) {
+          if (data.data.action === 1) {
+            this.citations.unshift(data.data.citation);
+          }
+        }
+      }
+    });
+
+    await modal.present();
+  }
+
+  async openCitationModal(index:number): Promise<void> {
+    const modal = await this.modalCtrl.create({
+      component: ModalcitationPage,
+      cssClass: 'modalstyle',
+      componentProps: {
+        'citation': this.citations[this.elmIndex]
       }
     });
 

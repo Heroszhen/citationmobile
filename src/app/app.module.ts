@@ -11,6 +11,8 @@ import { CUSTOM_ELEMENTS_SCHEMA, isDevMode } from '@angular/core';
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { ModaleditorPageModule } from './modules/modaleditor/modaleditor.module';
+import { ModalcitationPageModule } from './modules/modalcitation/modalcitation.module';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -25,7 +27,8 @@ import { ModaleditorPageModule } from './modules/modaleditor/modaleditor.module'
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
     }),
-    ModaleditorPageModule
+    ModaleditorPageModule,
+    ModalcitationPageModule
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

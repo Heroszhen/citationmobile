@@ -4,7 +4,7 @@ import { readFile } from 'src/app/utils/generalUtil';
 import { ModalController } from '@ionic/angular';
 import { StoreService } from 'src/app/services/store.service';
 import { ApiService } from 'src/app/services/api.service';
-import { IDataCitation } from 'src/app/interfaces/general';
+import { ICitation, IDataCitation } from 'src/app/interfaces/general';
 
 @Component({
   selector: 'app-modaleditor',
@@ -44,6 +44,8 @@ export class ModaleditorPage implements OnInit {
   @ViewChild('inputfile') inputFile: ElementRef<HTMLInputElement>;
   platform:string = "";
   message:string = "";
+  response:ICitation|null = null;
+  disabledButton:boolean = false;
 
   constructor(
     private modalCtr: ModalController,
@@ -78,7 +80,8 @@ export class ModaleditorPage implements OnInit {
   }
 
   editCitation(): void {
-    console.log(this.citationM,this.file, this.fileUrl, this.videoUrl, this.videoType)
+    this.disabledButton = true;
+
     let formD = new FormData();
     formD.append('_id', this.citationM["_id"]);
     formD.append('message', this.citationM["message"]);
@@ -90,20 +93,24 @@ export class ModaleditorPage implements OnInit {
     this.apiService.postEditCitation(formD).subscribe({
       next: (data:IDataCitation)=>{
         if (data["status"] === 1) {
-          console.log(data)
+          this.response = {
+            "citation": data["data"]["citation"],
+            "nbComments": data["data"]["nbComments"]
+          };
+          if (this.action === 1) {
+            this.closeModal();
+          }
+          this.disabledButton = false;
         }
-        
       },
-      error:(err)=>{
-       
-      }
+      error:(err)=>{this.disabledButton = false;}
     });
   }
 
   closeModal(): void {
     this.modalCtr.dismiss({
       'dismissed': true,
-      'citation': this.citationM,
+      'citation': this.response,
       'action': this.action
     });
   }

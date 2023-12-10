@@ -9,7 +9,10 @@
     <h2 class="user-name" *ngIf="citation['citation']['user'] !== null">{{citation['citation']['user']['lastname']}} {{citation['citation']['user']['firstname']}}</h2>
     <h4 class="created">{{citation['citation']['created'] | date:'dd/MM/YYYY hh:mm:ss'}}</h4>
     <section [innerHTML]="citation['citation']['message']" class="wrap-message"></section>
-    <section class="wrap-nbcomments">
+    <section class="ion-padding-top" *ngIf="citation['citation']['photo'] !== null">
+      <img src="{{citation['citation']['photo'][0]['url']}}" alt="">
+    </section>
+    <section class="wrap-nbcomments ion-margin-top">
       <div>
         <ion-icon name="chatbubble-outline" class="icon"></ion-icon>
         <div>{{citation['nbComments']}}</div>
