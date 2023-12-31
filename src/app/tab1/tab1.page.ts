@@ -160,7 +160,8 @@ export class Tab1Page implements OnInit{
       component: ModalcitationPage,
       cssClass: 'modalstyle',
       componentProps: {
-        'citationId': this.citations[this.elmIndex]["citation"]["_id"]
+        'citationId': this.citations[this.elmIndex]["citation"]["_id"],
+        'user': this.user
       }
     });
 

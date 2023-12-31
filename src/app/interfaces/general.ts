@@ -49,3 +49,8 @@ export interface IDataComments {
     status:number,
     data:Comment[]
 }
+
+export interface IDataComment {
+    status:number,
+    data:Comment
+}

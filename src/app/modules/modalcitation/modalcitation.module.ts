@@ -8,6 +8,7 @@ import { ModalcitationPageRoutingModule } from './modalcitation-routing.module';
 
 import { ModalcitationPage } from './modalcitation.page';
 import { SharedModule } from 'src/app/components/shared.module';
+import { QuillModule } from 'ngx-quill';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { SharedModule } from 'src/app/components/shared.module';
     FormsModule,
     IonicModule,
     ModalcitationPageRoutingModule,
-    SharedModule
+    SharedModule,
+    QuillModule
   ],
   declarations: [ModalcitationPage],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

@@ -139,6 +139,7 @@ export class AppComponent implements OnInit {
 
   deconnect():void {
     localStorage.removeItem("token");
+    this.storeService.user$.next([null]);
     this.storeService.isConnected$.next([false]);
   }
 
