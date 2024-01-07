@@ -7,6 +7,7 @@ import { ApiService } from './services/api.service';
 import { IData, ILogin } from './interfaces/general';
 import { BeforeInstallPromptEvent } from './interfaces/general';
 import { Router } from '@angular/router';
+import { SocketService } from './services/socket.service';
 
 declare global {
   interface WindowEventMap {
@@ -40,7 +41,8 @@ export class AppComponent implements OnInit {
     private readonly menuController: MenuController,
     private readonly loadingCtrl: LoadingController,
     private readonly apiService: ApiService,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly socketService: SocketService
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -112,8 +114,7 @@ export class AppComponent implements OnInit {
           this.switchModal(null);
         } 
       },
-      error:(err)=>{
-      }
+      error:(err)=>{}
     });
   }
 
@@ -138,9 +139,11 @@ export class AppComponent implements OnInit {
   }
 
   deconnect():void {
+    this.socketService.socket.emit("client:user:deconnect", {});
     localStorage.removeItem("token");
     this.storeService.user$.next([null]);
     this.storeService.isConnected$.next([false]);
+    this.router.navigate(['/']);
   }
 
   async getLoginProfile(): Promise<void> {
@@ -148,6 +151,7 @@ export class AppComponent implements OnInit {
       next: (data:IData)=>{
         if (data["status"] === 1) {
          this.storeService.user$.next([data["data"]]);
+         this.socketService.setSocket();
         } else {
           this.deconnect();
         }

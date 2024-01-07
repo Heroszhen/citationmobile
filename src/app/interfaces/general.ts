@@ -30,6 +30,13 @@ export interface IUser {
     created:string
 }
 
+export interface IPhoneUser {
+    _id:string,
+    firstname:string,
+    lastname:string,
+    photo: {name:string, url:string},
+}
+
 export interface ICitation {
     citation: Citation,
     nbComments: number
@@ -54,3 +61,9 @@ export interface IDataComment {
     status:number,
     data:Comment
 }
+
+export interface IDataPhoneUsers {
+    status:number,
+    data:IPhoneUser[]
+}
+

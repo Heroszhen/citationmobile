@@ -17,6 +17,12 @@
             <ion-label>Cloud</ion-label>
           </ion-item>
         </ion-menu-toggle>
+        <ion-menu-toggle *ngIf="isConnected">
+          <ion-item [routerLink]="['/telephone']" routerLinkActive="active" routerDirection="forward">
+            <ion-icon name="call-outline" slot="start"></ion-icon>
+            <ion-label>Téléphoner</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
         <ion-menu-toggle>
           <ion-item [routerLink]="['/contact']" routerLinkActive="active" routerDirection="forward">
             <ion-icon name="mail-outline" slot="start"></ion-icon>

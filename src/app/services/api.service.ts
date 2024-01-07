@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BaseService } from './base.service';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { IData, IDataCitation, IDataCitations, IDataComment, IDataComments, ILogin } from '../interfaces/general';
+import { IData, IDataCitation, IDataCitations, IDataComment, IDataComments, IDataPhoneUsers, ILogin } from '../interfaces/general';
 import { Citation } from '../models/citation';
 import { Comment } from '../models/comment';
 
@@ -52,5 +52,9 @@ export class ApiService extends BaseService {
   }
   deleteDeleteComment(commentId:string): Observable<IData> {
     return this.http.delete<IData>(`${this.baseUrl}/api/comment/${commentId}`, this.getHttpOptionsAuth());
+  }
+
+  getGetPhoneUsers(): Observable<IDataPhoneUsers> {
+    return this.http.get<IDataPhoneUsers>(`${this.baseUrl}/api/phone/users`, this.getHttpOptionsAuth());
   }
 }

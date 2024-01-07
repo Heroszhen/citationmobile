@@ -1,0 +1,45 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <div>
+      <ion-searchbar show-clear-button="always" value="Always Show" [(ngModel)]="keywords"></ion-searchbar>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list lines="full">
+    <ng-container *ngFor="let user of allUsers;let key = index;">
+      <ng-container *ngIf="checkUserByKeywords(user)">
+        <ion-item>
+          <ion-avatar slot="start">
+            <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+          </ion-avatar>
+          <ion-label> {{user.lastname}} {{user.firstname}}</ion-label>
+          <ion-button slot="end" size="medium" color="dark" (click)="callUser(key);">
+            <ion-icon name="call-outline"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ng-container>
+    </ng-container>
+  </ion-list>
+
+  <ion-button id="open-modal" expand="block">Open Modal</ion-button>
+  <ion-modal #phonemodal trigger="open-modal" [enterAnimation]="enterAnimation" [leaveAnimation]="leaveAnimation">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Modal</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="phonemodal.dismiss()">Close</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <app-phonescreen [modal]="phoneModal" [isCaller]="true" [caller]="user" [called]="allUsers[elmIndex]"></app-phonescreen>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>

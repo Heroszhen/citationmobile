@@ -4,15 +4,18 @@ import { CommonModule } from '@angular/common';
 import { CitationComponent } from './citation/citation.component';
 import { EditorComponent } from './editor/editor.component';
 import { FormsModule } from '@angular/forms';
+import { PhonescreenComponent } from './phonescreen/phonescreen.component';
 
 @NgModule({
   declarations: [
     CitationComponent,
-    EditorComponent
+    EditorComponent,
+    PhonescreenComponent
   ],
   exports: [
     CitationComponent,
-    EditorComponent
+    EditorComponent,
+    PhonescreenComponent
   ],
   imports: [
     CommonModule,

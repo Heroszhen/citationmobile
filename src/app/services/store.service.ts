@@ -11,6 +11,7 @@ export class StoreService {
   user$ = new BehaviorSubject<Array<IUser|null>>([null]);
   isServerFree$ = new BehaviorSubject<Array<Boolean>>([false]);
   citations$ = new BehaviorSubject<Array<ICitation>>([]);
+  isOnCalling$ = new BehaviorSubject<Array<Boolean>>([false]);
 
   constructor() { }
 

@@ -45,6 +45,11 @@ const routes: Routes = [
     path: 'citation/:id',
     loadChildren: () => import('./pages/citation/citation.module').then( m => m.CitationPageModule)
   },
+  {
+    path: 'telephone',
+    loadChildren: () => import('./pages/phone/phone.module').then( m => m.PhonePageModule)
+  },
+
 ];
 @NgModule({
   imports: [
