@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AnimationController, IonModal, LoadingController } from '@ionic/angular';
+import { AnimationController, IonModal } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { IDataPhoneUsers, IPhoneUser, IUser } from 'src/app/interfaces/general';
 import { ApiService } from 'src/app/services/api.service';
@@ -22,7 +22,6 @@ export class PhonePage implements OnInit {
   constructor(
     private readonly apiService: ApiService,
     private readonly storeService: StoreService,
-    private readonly loadingCtrl: LoadingController,
     private readonly animationCtrl: AnimationController
   ) { }
 
@@ -30,10 +29,6 @@ export class PhonePage implements OnInit {
   }
 
   async ionViewWillEnter(): Promise<void> {
-    this.loader = await this.loadingCtrl.create({
-      spinner: "circles"
-    });
-
     let subscriberUser:Subscription = this.storeService.user$.subscribe((data:Array<IUser|null>) => {
       this.user = data[0];
     });
@@ -58,6 +53,7 @@ export class PhonePage implements OnInit {
   }
 
   checkUserByKeywords(user:IPhoneUser): boolean {
+    if (user._id === this.user?._id)return false;
     if (user.lastname.toLowerCase().includes(this.keywords.toLowerCase()))return true;
     if (user.firstname.toLowerCase().includes(this.keywords.toLowerCase()))return true;
 

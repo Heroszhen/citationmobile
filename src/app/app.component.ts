@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LoadingController, Platform } from '@ionic/angular';
+import { LoadingController, ModalController, Platform } from '@ionic/angular';
 import { environment } from 'src/environments/environment';
 import { StoreService } from './services/store.service';
 import { MenuController } from '@ionic/angular';
@@ -8,6 +8,7 @@ import { IData, ILogin } from './interfaces/general';
 import { BeforeInstallPromptEvent } from './interfaces/general';
 import { Router } from '@angular/router';
 import { SocketService } from './services/socket.service';
+import { PhonescreenComponent } from './components/phonescreen/phonescreen.component';
 
 declare global {
   interface WindowEventMap {
@@ -42,7 +43,8 @@ export class AppComponent implements OnInit {
     private readonly loadingCtrl: LoadingController,
     private readonly apiService: ApiService,
     private readonly router: Router,
-    private readonly socketService: SocketService
+    private readonly socketService: SocketService,
+    private readonly modalCtrl: ModalController
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -67,6 +69,24 @@ export class AppComponent implements OnInit {
     this.storeService.isConnected$.subscribe(async (data:Array<boolean|null>) => {
       this.isConnected = data[0];
       if (this.isConnected === true)await this.getLoginProfile();
+    });
+  }
+
+  listenSocket():void {
+    this.socketService.socket.on("server:call:sendPeerId", async(data:any) => {
+      if (this.storeService.isOnCalling$.getValue()[0] === false) {
+        if (data['user']['_id'] === undefined)data['user']["_id"] = data['user']['id'];
+        const modal = await this.modalCtrl.create({
+          component: PhonescreenComponent,
+          cssClass: 'modalstyle',
+          componentProps: {
+            caller:data['user'],
+            called:this.storeService.user$.getValue()[0],
+            hisPeerId: data['peerId']
+          }
+        });
+        await modal.present();
+      }
     });
   }
 
@@ -139,7 +159,7 @@ export class AppComponent implements OnInit {
   }
 
   deconnect():void {
-    this.socketService.socket.emit("client:user:deconnect", {});
+    if (this.socketService.socket !== undefined)this.socketService.socket.emit("client:user:deconnect", {});
     localStorage.removeItem("token");
     this.storeService.user$.next([null]);
     this.storeService.isConnected$.next([false]);
@@ -152,6 +172,7 @@ export class AppComponent implements OnInit {
         if (data["status"] === 1) {
          this.storeService.user$.next([data["data"]]);
          this.socketService.setSocket();
+         this.listenSocket();
         } else {
           this.deconnect();
         }

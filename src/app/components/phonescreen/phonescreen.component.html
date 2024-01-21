@@ -1,3 +1,30 @@
-<p>
-  phonescreen works!
-</p>
+<div class="phonescreen">
+  <section *ngIf="!communicating" class="title">
+    <h1 *ngIf="isCaller">
+      Vous appelez {{called?.lastname}} {{called?.firstname}}
+    </h1>
+    <h1 *ngIf="!isCaller">
+       {{caller?.lastname}} {{caller?.firstname}} vous apelle
+    </h1>
+  </section>
+
+  <video autoPlay #remoteVideo *ngIf="communicating"></video>
+
+  <section class="btns">
+    <div class="btn">
+      <ion-icon name="volume-high-outline"></ion-icon>
+    </div>
+    <div class="btn btn-phone" (click)="endCall()">
+      <ion-icon name="call-outline"></ion-icon>
+    </div>
+    <ng-container *ngIf="!isCaller">
+      <div class="btn btn-phone white" (click)="acceptCall()" *ngIf="!communicating">
+        <ion-icon name="call-outline"></ion-icon>
+      </div>
+    </ng-container>
+    <div class="btn">
+      <ion-icon name="videocam-outline"></ion-icon>
+    </div>
+  </section>
+  <audio controls loop src="/assets/files/caca.mp3" class="d-none" #audiosong></audio>
+</div>

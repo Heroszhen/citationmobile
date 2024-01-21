@@ -26,17 +26,16 @@
     </ng-container>
   </ion-list>
 
-  <ion-button id="open-modal" expand="block">Open Modal</ion-button>
-  <ion-modal #phonemodal trigger="open-modal" [enterAnimation]="enterAnimation" [leaveAnimation]="leaveAnimation">
+  <ion-modal #phonemodal [enterAnimation]="enterAnimation" [leaveAnimation]="leaveAnimation">
     <ng-template>
-      <ion-header>
+      <!-- <ion-header>
         <ion-toolbar>
           <ion-title>Modal</ion-title>
           <ion-buttons slot="end">
             <ion-button (click)="phonemodal.dismiss()">Close</ion-button>
           </ion-buttons>
         </ion-toolbar>
-      </ion-header>
+      </ion-header> -->
       <ion-content>
         <app-phonescreen [modal]="phoneModal" [isCaller]="true" [caller]="user" [called]="allUsers[elmIndex]"></app-phonescreen>
       </ion-content>
