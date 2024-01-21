@@ -30,15 +30,14 @@ export class PhonescreenComponent  implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit() {
     this.socketService.socket.on("server:user:endCall", async (data:any) => {
-      //this.endCall();
-      if (this.communicating) {
-        const toast = await this.toastController.create({
-          message: `${this.called?.lastname} ${this.called?.firstname} n'est pas joignable`,
-          duration: 1500,
-          position: 'top',
-        });
-        await toast.present();
-      }
+      const toast = await this.toastController.create({
+        message: `Fin de l'appel avec ${this.called?.lastname} ${this.called?.firstname}`,
+        duration: 3000,
+        position: 'top',
+      });
+      await toast.present();
+
+      this.modal.dismiss();
     });
 
     this.socketService.socket.on("server:call:sendPeerId", async(data:any) => {
@@ -67,6 +66,10 @@ export class PhonescreenComponent  implements OnInit, AfterViewInit, OnDestroy {
 
   endCall(): void {
     this.storeService.isOnCalling$.next([false]);
+    this.socketService.socket.emit("client:user:hangupCall", {
+      user: this.isCaller ? this.caller : this.called,
+      other: this.isCaller ? this.called : this.caller,
+    });
     this.modal.dismiss();
   }
 
