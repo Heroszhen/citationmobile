@@ -47,6 +47,7 @@ export class PhonescreenComponent  implements OnInit, AfterViewInit, OnDestroy {
     this.socketService.socket.on("server:call:sendPeerId", async (data:any) => {
       this.hisPeerId = data['peerId'];
       this.audioSong.nativeElement.pause();
+      this.communicating = true;
       await this.createPeer();
       await this.callOtherByPeer();
     });
