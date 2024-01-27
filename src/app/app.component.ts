@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LoadingController, ModalController, Platform } from '@ionic/angular';
+import { LoadingController, ModalController, Platform, ToastController } from '@ionic/angular';
 import { environment } from 'src/environments/environment';
 import { StoreService } from './services/store.service';
 import { MenuController } from '@ionic/angular';
@@ -9,6 +9,9 @@ import { BeforeInstallPromptEvent } from './interfaces/general';
 import { Router } from '@angular/router';
 import { SocketService } from './services/socket.service';
 import { PhonescreenComponent } from './components/phonescreen/phonescreen.component';
+import { SwUpdate, VersionReadyEvent } from '@angular/service-worker';
+import { filter, map } from 'rxjs';
+import { wait } from './utils/generalUtil';
 
 declare global {
   interface WindowEventMap {
@@ -44,7 +47,9 @@ export class AppComponent implements OnInit {
     private readonly apiService: ApiService,
     private readonly router: Router,
     private readonly socketService: SocketService,
-    private readonly modalCtrl: ModalController
+    private readonly modalCtrl: ModalController,
+    private readonly swUpdate: SwUpdate,
+    private toastController: ToastController
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -61,6 +66,7 @@ export class AppComponent implements OnInit {
         'beforeinstallprompt',
         this.onBeforeInstallPrompt.bind(this)
       );
+      this.updateApplication();
     }  
     
     await this.checkServer();
@@ -155,6 +161,24 @@ export class AppComponent implements OnInit {
     const {outcome: outcome, platform:platform} = await this.deferredPrompt.userChoice;
     if (outcome === "accepted") {
       this.deferredPrompt = null;
+    }
+  }
+
+  async updateApplication(): Promise<void> {
+    if (this.swUpdate.isEnabled) {
+      this.swUpdate.versionUpdates
+        .pipe(filter((evt): evt is VersionReadyEvent => evt.type === 'VERSION_READY'))
+        .subscribe(async (evt) => {
+          await wait(0.5);
+          const toast = await this.toastController.create({
+            message: "Une nouvelle version détectée, l'application va être redémarrée pour une mise à jour.",
+            duration: 2000,
+            position: 'middle',
+          });
+          await toast.present();
+          
+          document.location.reload();
+        });
     }
   }
 

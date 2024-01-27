@@ -106,7 +106,7 @@ export class PhonescreenComponent  implements OnInit, AfterViewInit, OnDestroy {
 
     //recieve
     this.peer.on('call', async (call) => {
-      let stream = await navigator.mediaDevices.getUserMedia({ video: false, audio: true });
+      let stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
       call.answer(stream);
 
       call.on('stream', async (stream) => {
@@ -119,7 +119,7 @@ export class PhonescreenComponent  implements OnInit, AfterViewInit, OnDestroy {
   }
 
   async callOtherByPeer(): Promise<void> {
-    let stream = await navigator.mediaDevices.getUserMedia({ video: false, audio: true })
+    let stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true })
     await wait(0.15);
     //call another
     const call = this.peer.call(this.hisPeerId, stream)
