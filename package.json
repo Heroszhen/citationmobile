@@ -11,8 +11,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "serve": "ionic serve --open",
-    "ionic_build": "ionic build --prod",
-    "live": "ionic cap sync && ionic capacitor run android -l --external --open",
+    "build:ionic": "ionic build --prod",
+    "live:android": "ionic cap sync && ionic capacitor run android -l --external --open",
     "resources:android": "capacitor-resources -p android"
   },
   "private": true,

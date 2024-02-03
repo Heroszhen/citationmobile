@@ -2,9 +2,10 @@ import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'citationmobile.io.ionic.starter',
-  appName: 'citationmobile',
+  appName: 'citation',
   webDir: 'www',
   server: {
+    hostname: 'localhost',
     androidScheme: 'https'
   },
   plugins: {
