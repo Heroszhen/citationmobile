@@ -6,6 +6,8 @@ import { StoreService } from 'src/app/services/store.service';
 import { v4 as uuidv4 } from 'uuid';
 import Peer from 'peerjs';
 import { wait } from 'src/app/utils/generalUtil';
+import { Microphone } from '@mozartec/capacitor-microphone';
+import { Camera } from '@capacitor/camera';
 
 @Component({
   selector: 'app-phonescreen',
@@ -23,6 +25,7 @@ export class PhonescreenComponent  implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('audiosong') audioSong: ElementRef<HTMLAudioElement>;
   communicating:boolean = false;
   peer: Peer;
+  platform:string = "";
 
   constructor(
     private readonly storeService: StoreService,
@@ -30,6 +33,7 @@ export class PhonescreenComponent  implements OnInit, AfterViewInit, OnDestroy {
     private readonly toastController: ToastController,
   ) {
     this.storeService.isOnCalling$.next([true]);
+    this.platform = this.storeService.platform$.getValue()[0];
   }
 
   ngOnInit() {
@@ -63,7 +67,12 @@ export class PhonescreenComponent  implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  ngAfterViewInit() {
+  async ngAfterViewInit() {
+    if (this.platform === 'android') {
+      //check microphone
+      const microphoneRequestPermissions = await Microphone.requestPermissions();
+      const cameraRequestPermissions = await Camera.requestPermissions();
+    }
     this.audioSong.nativeElement.play();
   }
 
