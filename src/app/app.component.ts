@@ -33,11 +33,14 @@ export class AppComponent implements OnInit {
   isProduction:boolean = environment.production;
   isConnected:boolean|null = false;
   modal:number|null = null;
+  modalSection:number = 1;
   loginM:Login = new Login();
+  loginQrcode:string = "";
   loader:any = null;
   pf:string = "";
   deferredPrompt:BeforeInstallPromptEvent|null = null;
   currentRoute:string = "";
+  timer:number|null = null;
 
   constructor(
     private readonly platform: Platform,
@@ -127,6 +130,12 @@ export class AppComponent implements OnInit {
     this.menuController.close("mainmenu");
     if (modal === 1) {
       this.loginM = new Login();
+      this.modalSection = 1;
+    }
+    if (modal === null) {
+      if (this.modal === 1) {
+        this.clearTimer();
+      }
     }
     this.modal = modal;
   }
@@ -142,6 +151,40 @@ export class AppComponent implements OnInit {
       },
       error:(err)=>{}
     });
+  }
+
+  getLoginQrcode():void {
+    this.modalSection = 2;
+    this.loginQrcode = "";
+    this.apiService.getLoginQrcode().subscribe({
+      next: (data:ILogin)=>{
+        if (data["status"] === 1) {
+          this.loginQrcode = data["data"];
+          this.requestLoginQrcodeStatus();
+        } 
+      },
+      error:(err)=>{}
+    })
+  }
+
+  requestLoginQrcodeStatus() {
+    this.timer = window.setInterval(() => {
+      this.apiService.postGetLoginQrcodeStatus({qrcode:this.loginQrcode}).subscribe({
+        next: (data:IData)=>{
+          if (data["status"] === 1) {
+            localStorage.setItem("token", data["data"]);
+            this.storeService.isConnected$.next([true]);
+            this.switchModal(null);
+          }
+        },
+        error:(err)=>{}
+      });
+    }, 5000);
+  }
+
+  clearTimer() {
+    clearInterval(this.timer as number);
+    this.timer = null;
   }
 
   onBeforeInstallPrompt(event: BeforeInstallPromptEvent): void {
@@ -206,4 +249,5 @@ export class AppComponent implements OnInit {
       }
     });
   }
+
 }

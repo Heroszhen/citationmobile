@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BaseService } from './base.service';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { IData, IDataCitation, IDataCitations, IDataComment, IDataComments, IDataPhoneUsers, ILogin } from '../interfaces/general';
+import { IData, IDataCitation, IDataCitations, IDataComment, IDataComments, IDataPhoneUsers, ILogin, ILoginQrcode } from '../interfaces/general';
 import { Citation } from '../models/citation';
 import { Comment } from '../models/comment';
 
@@ -21,6 +21,18 @@ export class ApiService extends BaseService {
 
   postLogin(data:object): Observable<ILogin> {
     return this.http.post<ILogin>(`${this.baseUrl}/api/login`, JSON.stringify(data), this.getHttpOptionsAuth());
+  }
+
+  getLoginQrcode(): Observable<IData> {
+    return this.http.get<IData>(`${this.baseUrl}/api/login/qrcode`, this.getHttpOptionsAuth());
+  }
+
+  postGetLoginQrcodeStatus(data:ILoginQrcode): Observable<IData> {
+    return this.http.post<IData>(`${this.baseUrl}/api/login/qrcode-status`, JSON.stringify(data), this.getHttpOptionsAuth());
+  }
+
+  postConfirmLoginQrcodeStatus(data:object): Observable<IData> {
+    return this.http.post<IData>(`${this.baseUrl}/api/login/confirm-qrcode-status`, JSON.stringify(data), this.getHttpOptionsAuth());
   }
 
   getGetLoginProfile(): Observable<IData> {

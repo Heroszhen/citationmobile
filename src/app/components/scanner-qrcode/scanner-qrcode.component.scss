@@ -1,0 +1,66 @@
+#scanner-qrcode {
+    width:100%;
+    height:100vh;
+    position: relative;
+
+    .border-scanner {
+        position: absolute;
+        z-index: 999999;
+        width: 50px;
+        height: 50px;
+    }
+    .border-scanner#lefttop {
+        left: 0;
+        top: 0;
+        border-top: 10px solid #2f7f9d;
+        border-left: 10px solid #2f7f9d;
+    }
+    
+    .border-scanner#righttop {
+        right: 0;
+        top: 0;
+        border-top: 10px solid #2f7f9d;
+        border-right: 10px solid #2f7f9d;
+    }
+    
+    .border-scanner#leftbottom {
+        left: 0;
+        bottom: 0;
+        border-bottom: 10px solid #2f7f9d;
+        border-left: 10px solid #2f7f9d;
+    }
+    
+    .border-scanner#rightbottom {
+        right: 0;
+        bottom: 0;
+        border-bottom: 10px solid #2f7f9d;
+        border-right: 10px solid #2f7f9d;
+    }
+    
+    .border-scanner#line {
+        width: calc(100% - 10px);
+        height: 5px;
+        background: #2f7f9d;
+        top: 2%;
+        left: 5px;
+        animation: move 5s linear infinite;
+    }
+}
+
+@keyframes move {
+    0% {
+        top: 2%
+    }
+
+    50% {
+        top: 95%
+    }
+
+    70% {
+        top: 50%
+    }
+
+    100% {
+        top: 2%
+    }
+}

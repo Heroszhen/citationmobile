@@ -38,6 +38,10 @@ app-root {
     margin: 0 auto;
 }
 
+video:not(.video){
+    object-fit: fill;
+}
+
 /*custom class*/
 .pointer {
     cursor: pointer;

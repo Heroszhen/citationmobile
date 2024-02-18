@@ -5,17 +5,20 @@ import { CitationComponent } from './citation/citation.component';
 import { EditorComponent } from './editor/editor.component';
 import { FormsModule } from '@angular/forms';
 import { PhonescreenComponent } from './phonescreen/phonescreen.component';
+import { ScannerQrcodeComponent } from './scanner-qrcode/scanner-qrcode.component';
 
 @NgModule({
   declarations: [
     CitationComponent,
     EditorComponent,
-    PhonescreenComponent
+    PhonescreenComponent,
+    ScannerQrcodeComponent
   ],
   exports: [
     CitationComponent,
     EditorComponent,
-    PhonescreenComponent
+    PhonescreenComponent,
+    ScannerQrcodeComponent
   ],
   imports: [
     CommonModule,

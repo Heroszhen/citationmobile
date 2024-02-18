@@ -67,3 +67,6 @@ export interface IDataPhoneUsers {
     data:IPhoneUser[]
 }
 
+export interface ILoginQrcode {
+    qrcode:string
+}

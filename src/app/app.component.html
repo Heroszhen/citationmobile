@@ -99,7 +99,7 @@
                 <h2 class="ion-text-center font-weight-bold">
                   <strong>Connectez-vous à Citation</strong>
                 </h2>
-                <ion-list>
+                <ion-list *ngIf="modalSection===1">
                   <ion-item lines="full">
                     <ion-input labelPlacement="floating" type="email" name="email" #email="ngModel" [(ngModel)]="loginM['email']" required>
                       <div slot="label" >Mail <ion-text color="danger"> *</ion-text></div>
@@ -121,6 +121,21 @@
                       <ion-icon name="finger-print-outline"></ion-icon>
                     </ion-button>
                   </div>
+                  <div class="ion-margin-top ion-text-center" *ngIf="pf==='web'">
+                    <ion-button shape="round" color="dark" (click)="getLoginQrcode()">
+                      <ion-icon name="qr-code-outline"></ion-icon>
+                    </ion-button>
+                  </div>
+                </ion-list>
+                <ion-list *ngIf="modalSection===2">
+                  <div lines="full">
+                      <img src="{{loginQrcode}}" alt="" *ngIf="loginQrcode !== ''">
+                      <div class="ion-margin-top ion-text-center" *ngIf="pf==='web'">
+                        <ion-button shape="round" color="dark" (click)="clearTimer();modalSection=1">
+                          <ion-icon name="mail-outline"></ion-icon>
+                        </ion-button>
+                      </div>
+                    </div>
                 </ion-list>
               </form>
             </ion-col>
