@@ -33,6 +33,13 @@ img {
     height:auto;
 }
 
+
+body.scanner-active {
+    --background: transparent;
+    --ion-background-color: transparent;
+  }
+
+
 app-root {
     max-width: 600px;
     margin: 0 auto;

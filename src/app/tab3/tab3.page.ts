@@ -15,6 +15,8 @@ export class Tab3Page {
   subscribers: Subscription[] = [];
   user:IUser|null = null;
   
+  sectionModal:number|null = null;
+
   constructor(
     private readonly actionSheetCtrl: ActionSheetController,
     private readonly apiService: ApiService,
@@ -63,6 +65,7 @@ export class Tab3Page {
   }
 
   async openScannerModal(): Promise<void> {
+    //this.sectionModal = 1;
     const modal = await this.modalCtrl.create({
       component: ScannerQrcodeComponent,
       componentProps: {
@@ -77,4 +80,8 @@ export class Tab3Page {
     }
   }
 
+  ConfirmLoginQrcodeStatus(event:any):void {
+    this.sectionModal = null;console.log()
+    this.apiService.postConfirmLoginQrcodeStatus({key:(JSON.parse(event))['key']}).subscribe({});
+  }
 }

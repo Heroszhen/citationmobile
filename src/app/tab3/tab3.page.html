@@ -15,4 +15,7 @@
       <ion-icon name="menu-outline" (click)="presentActionSheet()" class="pointer"></ion-icon>
     </div>
   </section>
+  <section id="section-modal">
+    <app-scanner-qrcode *ngIf="sectionModal===1" (sendCode)="ConfirmLoginQrcodeStatus($event)"></app-scanner-qrcode>
+  </section>
 </ion-content>
