@@ -55,6 +55,10 @@ export class ApiService extends BaseService {
     return this.http.get<IDataCitation>(`${this.baseUrl}/api/citations/citation/${id}`, this.getHttpOptionsAuth());
   }
 
+  deleteDeleteCitation(id:string): Observable<IData> {
+    return this.http.delete<IData>(`${this.baseUrl}/api/citations/citation/${id}`, this.getHttpOptionsAuth());
+  }
+
   getGetCommentsByCitation(citationId:string, pageItem:number): Observable<IDataComments> {
     return this.http.get<IDataComments>(`${this.baseUrl}/api/citations/citation/${citationId}/comments?page=${pageItem}`, this.getHttpOptionsAuth());
   }

@@ -35,7 +35,7 @@
 
   <ion-list class="list-citations">
     <ng-container *ngFor="let item of citations; let key = index;">
-      <app-citation [citation]="item" (click)="openCitationModal(key)"></app-citation>
+      <app-citation [citation]="item" (click)="openCitationModal(key)" (sendDeletion)="deleteCitation($event)"></app-citation>
     </ng-container>
   </ion-list>
 

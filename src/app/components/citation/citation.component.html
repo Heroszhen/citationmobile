@@ -27,6 +27,14 @@
       <div>
         <ion-icon name="mail-outline"></ion-icon>
       </div>
+      <ng-container *ngIf="user !==null && 
+        (citation['citation']['user']?._id === user['_id'] || 
+        user['roles'].includes('role_admin'))"
+      >
+        <div>
+          <ion-icon name="trash-outline" (click)="deleteCitation();$event.stopPropagation()"></ion-icon>
+        </div>
+      </ng-container>
     </section>
   </ion-label>
 </ion-item>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ICitation, IDataCitations, IUser } from '../interfaces/general';
+import { ICitation, IData, IDataCitations, IUser } from '../interfaces/general';
 import { Subscription } from 'rxjs';
 import { StoreService } from '../services/store.service';
 import { ApiService } from '../services/api.service';
@@ -41,6 +41,7 @@ export class Tab1Page implements OnInit{
       ['clean'],
     ]
   };
+  loader:any = null;
 
   constructor(
     private readonly storeService:StoreService,
@@ -51,7 +52,10 @@ export class Tab1Page implements OnInit{
 
   ngOnInit() {}
 
-  ionViewWillEnter(): void {
+  async ionViewWillEnter(): Promise<void> {
+    this.loader = await this.loadingCtrl.create({
+      spinner: "circles"
+    });
     this.pageItem = 1;
     this.keywords = "";
     this.citations = [];
@@ -171,5 +175,20 @@ export class Tab1Page implements OnInit{
     });
 
     await modal.present();
+  }
+
+  deleteCitation(e:string): void {
+    this.loader.present();
+    this.apiService.deleteDeleteCitation(e).subscribe({
+      next: (data:IData)=>{
+        if (data["status"] === 1) {
+          this.citations = this.citations.filter((item:ICitation) => item.citation._id !== e);
+        }
+        this.loader.dismiss();
+      },
+      error:(err)=>{
+        this.loader.dismiss();
+      }
+    });
   }
 }
