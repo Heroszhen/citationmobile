@@ -108,7 +108,6 @@ export class AppComponent implements OnInit {
     } else {
       this.pf = "web";
     }
-    alert(this.pf);
     this.storeService.platform$.next([this.pf]);
   }
 

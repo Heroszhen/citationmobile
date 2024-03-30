@@ -33,3 +33,10 @@ export function readFile(file:File):Promise<string>{
     reader.readAsDataURL(file);
   });
 }
+
+export function isMobileNavigator():boolean {
+  let useragent = navigator.userAgent.toLowerCase();
+  const regex = RegExp('.*mobile.*');
+  if(regex.test(useragent))return true;
+  return false;
+}
