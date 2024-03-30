@@ -101,9 +101,14 @@ export class AppComponent implements OnInit {
 
   getPlatForm(): void {
     /** "ios" | "ipad" | "iphone" | "android" | "phablet" | "tablet" | "cordova" | "capacitor" | "electron" | "pwa" | "mobile" | "mobileweb" | "desktop" | "hybrid" */
-    if (this.platform.is('android'))this.pf = "android";
-    else if (this.platform.is('ios'))this.pf = "ios";
-    else this.pf = "web";
+    let envs:string = this.platform.platforms().join('-');
+    if (envs.includes('hybrid')) {
+      if (envs.includes('android'))this.pf = "android";
+      if (envs.includes('ios'))this.pf = "android";
+    } else {
+      this.pf = "web";
+    }
+    alert(this.pf);
     this.storeService.platform$.next([this.pf]);
   }
 
