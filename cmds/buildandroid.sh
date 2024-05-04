@@ -9,6 +9,7 @@ ionic build --prod
 ionic capacitor add android
 npm run resources:android
 # ionic capacitor open android
+cp cmds/local.properties android/local.properties
 
 read -p "You should follow the instructions blew : y(yes) or n(no) ?" answer
 
