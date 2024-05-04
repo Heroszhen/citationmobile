@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { ModaleditorPageModule } from './modules/modaleditor/modaleditor.module';
 import { ModalcitationPageModule } from './modules/modalcitation/modalcitation.module';
+import { ModalcameraPageModule } from './modules/modalcamera/modalcamera.module';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { ModalcitationPageModule } from './modules/modalcitation/modalcitation.m
       registrationStrategy: 'registerWhenStable:30000'
     }),
     ModaleditorPageModule,
-    ModalcitationPageModule
+    ModalcitationPageModule,
+    ModalcameraPageModule
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

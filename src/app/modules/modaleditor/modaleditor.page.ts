@@ -5,6 +5,7 @@ import { ModalController } from '@ionic/angular';
 import { StoreService } from 'src/app/services/store.service';
 import { ApiService } from 'src/app/services/api.service';
 import { ICitation, IDataCitation } from 'src/app/interfaces/general';
+import { ModalcameraPage } from '../modalcamera/modalcamera.page';
 
 @Component({
   selector: 'app-modaleditor',
@@ -113,5 +114,23 @@ export class ModaleditorPage implements OnInit {
       'citation': this.response,
       'action': this.action
     });
+  }
+
+  async openModalCamera(): Promise<void> {
+    const modal = await this.modalCtr.create({
+      component: ModalcameraPage,
+      cssClass: 'modalstyle',
+      componentProps: {
+        // 'citationId': this.citations[this.elmIndex]["citation"]["_id"],
+        // 'user': this.user
+      }
+    });
+
+    modal.onDidDismiss().then((data) => {
+      if (data.data) {
+      }
+    });
+
+    await modal.present();
   }
 }

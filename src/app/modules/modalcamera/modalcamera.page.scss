@@ -1,0 +1,30 @@
+#modal-camera-wrap {
+    width: 100%;
+    height: 100vh;
+}
+
+ion-content {
+    --background: black;
+}
+section#cameraPreview {
+    transform: rotateY(180deg);
+    height: 0;
+    overflow: hidden;
+}
+
+section#cameraPreview.active {
+    height: calc(100vh - 120px);
+}
+
+.three-btns{
+    padding-top:10px;
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+    #btn-take-picture {
+        width:80px;
+        height:80px;
+        border-radius: 50%;
+        border: 2px solid red;
+    }
+}

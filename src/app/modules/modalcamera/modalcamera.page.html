@@ -1,3 +1,15 @@
 <ion-content [fullscreen]="true">
-  dddsdsf
+  <section id="modal-camera-wrap">
+    <section id="cameraPreview" class="cameraPreview" [ngClass]="{'active':cameraActive==true}"></section>
+
+    <section class="three-btns">
+      <ion-button color="danger" shape="round" (click)="closeModal(0)">
+        Fermer
+      </ion-button>
+      <div id="btn-take-picture" (click)="takePicture()"></div>
+      <ion-button color="light" shape="round" (click)="closeModal(1)">
+        Prendre
+      </ion-button>
+    </section>
+  </section>
 </ion-content>

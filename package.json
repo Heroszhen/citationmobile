@@ -28,6 +28,7 @@
     "@angular/router": "^16.0.0",
     "@angular/service-worker": "^16.2.9",
     "@capacitor-community/barcode-scanner": "^4.0.1",
+    "@capacitor-community/camera-preview": "^5.0.0",
     "@capacitor/android": "5.5.0",
     "@capacitor/app": "5.0.6",
     "@capacitor/camera": "^5.0.9",

@@ -11,7 +11,8 @@
   <section id="citation-editor" class="ion-padding">
     <section class="wrap-icons">
       <ion-icon name="image-outline" (click)="imageSection=true"></ion-icon>
-      <ion-icon name="camera-reverse-outline" *ngIf="platform !=='web'"></ion-icon>
+      <!-- *ngIf="platform !=='web'" -->
+      <ion-icon name="camera-reverse-outline"  (click)="openModalCamera()"></ion-icon>
       <ion-icon name="logo-youtube" (click)="videoSection=true"></ion-icon>
       <ion-icon name="happy-outline"></ion-icon>
       <ion-icon name="location-outline"></ion-icon>
@@ -54,6 +55,5 @@
   
       <ion-button expand="block" type="submit" [disabled]="citationform.form.invalid || citationM['message']==='' || disabledButton" class="ion-margin-top">Envoyer</ion-button>
     </form>
-    
   </section>
 </ion-content>
