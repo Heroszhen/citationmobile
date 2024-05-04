@@ -104,7 +104,7 @@ export class AppComponent implements OnInit {
     let envs:string = this.platform.platforms().join('-');
     if (envs.includes('hybrid')) {
       if (envs.includes('android'))this.pf = "android";
-      if (envs.includes('ios'))this.pf = "android";
+      if (envs.includes('ios'))this.pf = "ios";
     } else {
       this.pf = "web";
     }
@@ -192,7 +192,7 @@ export class AppComponent implements OnInit {
   }
 
   onBeforeInstallPrompt(event: BeforeInstallPromptEvent): void {
-    //console.log('🚀 onBeforeInstallPrompt');
+    //('🚀 onBeforeInstallPrompt');
     // Prevent the mini-info bar from appearing on mobile
     event?.preventDefault();
     // Stash the event so it can be triggered later.
@@ -200,7 +200,7 @@ export class AppComponent implements OnInit {
   }
 
   async installApp(): Promise<void> {
-    //console.log('install', this.deferredPrompt);
+    //('install', this.deferredPrompt);
     if (!this.deferredPrompt) {
       return;
     }

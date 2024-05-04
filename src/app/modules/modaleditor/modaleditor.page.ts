@@ -65,7 +65,7 @@ export class ModaleditorPage implements OnInit {
   }
 
   logChange(e:any): void{
-    console.log(e)
+
   }
 
   async handleFile(target:EventTarget|null): Promise<void>{

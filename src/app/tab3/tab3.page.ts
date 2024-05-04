@@ -5,6 +5,7 @@ import { ScannerQrcodeComponent } from '../components/scanner-qrcode/scanner-qrc
 import { StoreService } from '../services/store.service';
 import { Subscription } from 'rxjs';
 import { IUser } from '../interfaces/general';
+import { Haptics } from '@capacitor/haptics';
 
 @Component({
   selector: 'app-tab3',
@@ -77,11 +78,12 @@ export class Tab3Page {
     const { data, role } = await modal.onWillDismiss();
     if (data.content !== '') {
       this.apiService.postConfirmLoginQrcodeStatus({key:JSON.parse(data.content)['key']}).subscribe({});
+      await Haptics.vibrate();
     }
   }
 
-  ConfirmLoginQrcodeStatus(event:any):void {
-    this.sectionModal = null;console.log()
+  ConfirmLoginQrcodeStatus(event:string): void {
+    this.sectionModal = null;
     this.apiService.postConfirmLoginQrcodeStatus({key:(JSON.parse(event))['key']}).subscribe({});
   }
 }

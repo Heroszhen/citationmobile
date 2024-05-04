@@ -62,7 +62,6 @@ export class ScannerQrcodeComponent  implements OnInit, AfterViewInit {
     let video = document.querySelector("video");
     let div = video?.parentElement;
     // section?.appendChild(div as Node);
-    // console.log(div)
     if(div && div.style)div.style.zIndex = '999';
     document.querySelector('body')?.classList.add('scanner-active');
   }

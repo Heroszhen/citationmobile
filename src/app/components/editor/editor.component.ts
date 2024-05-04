@@ -48,7 +48,7 @@ export class EditorComponent  implements OnInit {
   }
 
   logChange(e:any): void{
-    console.log(e)
+    
   }
 
   async handleFile(target:EventTarget|null): Promise<void>{
@@ -64,6 +64,6 @@ export class EditorComponent  implements OnInit {
   }
 
   editCitation(): void {
-    console.log(this.citationM, this.videoUrl, this.videoType)
+    //(this.citationM, this.videoUrl, this.videoType)
   }
 }

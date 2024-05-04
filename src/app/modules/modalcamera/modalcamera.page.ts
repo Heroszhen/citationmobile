@@ -55,7 +55,7 @@ export class ModalcameraPage implements OnInit {
     const result = await CameraPreview.capture(cameraPreviewPictureOptions);
     let base64: string = `data:image/png;base64,${result.value}`;
     this.allphotos.push(base64);
-    console.log(result)
+    //(result)
     //this.closeModal(1);
   }
 }
