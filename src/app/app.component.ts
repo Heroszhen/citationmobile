@@ -6,7 +6,7 @@ import { MenuController } from '@ionic/angular';
 import { ApiService } from './services/api.service';
 import { IData, ILogin } from './interfaces/general';
 import { BeforeInstallPromptEvent } from './interfaces/general';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { SocketService } from './services/socket.service';
 import { PhonescreenComponent } from './components/phonescreen/phonescreen.component';
 import { SwUpdate, VersionReadyEvent } from '@angular/service-worker';
@@ -41,6 +41,7 @@ export class AppComponent implements OnInit {
   deferredPrompt:BeforeInstallPromptEvent|null = null;
   currentRoute:string = "";
   timer:number|null = null;
+  showIonTabs:boolean = true;
 
   constructor(
     private readonly platform: Platform,
@@ -52,10 +53,12 @@ export class AppComponent implements OnInit {
     private readonly socketService: SocketService,
     private readonly modalCtrl: ModalController,
     private readonly swUpdate: SwUpdate,
-    private toastController: ToastController
+    private readonly toastController: ToastController
   ) {}
 
   async ngOnInit(): Promise<void> {
+    this.routerListener();
+
     this.loader = await this.loadingCtrl.create({
       spinner: "circles"
     });
@@ -254,4 +257,16 @@ export class AppComponent implements OnInit {
     });
   }
 
+  routerListener(): void {
+    this.router.events.pipe(
+      filter((event:any): event is NavigationEnd => event instanceof NavigationEnd),
+      map((event: NavigationEnd) => event.url))
+      .subscribe({
+        next: (data:string)=>{
+          if (data === '/music')this.showIonTabs = false;
+          else this.showIonTabs = true;
+        },
+        error:(err:any) =>{}
+    });
+  }
 }

@@ -49,6 +49,11 @@ const routes: Routes = [
     path: 'telephone',
     loadChildren: () => import('./pages/phone/phone.module').then( m => m.PhonePageModule)
   },
+  {
+    path: 'music',
+    loadChildren: () => import('./pages/musicplayer/musicplayer.module').then( m => m.MusicplayerPageModule)
+  },
+
 
 ];
 @NgModule({
