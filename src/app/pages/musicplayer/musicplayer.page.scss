@@ -1,0 +1,28 @@
+$color1:#40495e;
+$color2:#334058;
+$sectionSearchHeight: 60px;
+*{
+    color: white;
+}
+#header-player {
+    height: 56px;
+    background-color: $color1;
+    overflow: hidden;
+}
+
+#wrap-music {
+    background-color: $color1;
+    height: calc(100vh - 56px - $sectionSearchHeight);
+    overflow: auto;
+}
+
+#section-search {
+    position: fixed;
+    z-index: 10;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: $sectionSearchHeight;
+    background-color: $color2;
+    overflow: hidden;
+}
