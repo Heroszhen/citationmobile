@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <section id="header-player">
-dqdfqsdf
+<div [routerLink]="['/']">Accueil</div>
     </section>
   </ion-toolbar>
 </ion-header>
@@ -9,7 +9,11 @@ dqdfqsdf
 <ion-content [fullscreen]="true">
   <section id="wrap-music">
     <section id="section-titles">
-
+      <div>{{folder}} : </div>
+      {{str}}
+      <div>
+        <input type="text" [(ngModel)]="folder" (keyup)="str=''"><button type="button" (click)="getMusicFiles()">envoyer</button>
+      </div>
     </section>
     <section id="section-playlists">
 

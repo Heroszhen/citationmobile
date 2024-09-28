@@ -33,14 +33,16 @@ fi
 # <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
 # <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 # <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+# <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
 # <uses-sdk tools:overrideLibrary="com.google.zxing.client.android" />
 
 # <manifest
 #   xmlns:android="http://schemas.android.com/apk/res/android"
-# +  xmlns:tools="http://schemas.android.com/tools"
+#   xmlns:tools="http://schemas.android.com/tools"
 #   package="com.example">
 #   <application
-# +    android:hardwareAccelerated="true"
+#      android:hardwareAccelerated="true"
+#      android:requestLegacyExternalStorage="true"
 #   >
 #   </application>
 # </manifest>

@@ -75,7 +75,7 @@ export class AppComponent implements OnInit {
       this.updateApplication();
     }  
     
-    await this.checkServer();
+    //await this.checkServer();
 
     this.storeService.checkConnection();
     this.storeService.isConnected$.subscribe(async (data:Array<boolean|null>) => {
