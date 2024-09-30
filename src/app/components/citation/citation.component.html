@@ -5,12 +5,21 @@
   <ion-avatar slot="start" *ngIf="citation['citation']['user'] === null || citation['citation']['user']['photo']['name'] === ''">
     <ion-icon name="person-circle-outline"></ion-icon>
   </ion-avatar>
-  <ion-label slot="end">
+  <ion-label>
     <h2 class="user-name" *ngIf="citation['citation']['user'] !== null">{{citation['citation']['user']['lastname']}} {{citation['citation']['user']['firstname']}}</h2>
     <h4 class="created">{{citation['citation']['created'] | date:'dd/MM/YYYY hh:mm:ss'}}</h4>
     <section [innerHTML]="citation['citation']['message']" class="wrap-message"></section>
     <section class="ion-padding-top" *ngIf="citation['citation']['photo'] !== null">
       <img src="{{citation['citation']['photo'][0]['url']}}" alt="">
+    </section>
+    <section class="ion-padding-top" *ngIf="citation['citation']['video'] !== null">
+      <div *ngIf="citation['citation']['video']['kind']===1">
+        <iframe [src]="citation['citation']['video']['url'] | safe: 'resourceUrl'"
+        frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" controls allowfullscreen></iframe>
+      </div>
+      <div *ngIf="citation['citation']['video']['kind']===2" 
+        [innerHTML]="citation['citation']['video']['url'] | safe: 'html'"
+      ></div>
     </section>
     <section class="wrap-nbcomments ion-margin-top">
       <div>

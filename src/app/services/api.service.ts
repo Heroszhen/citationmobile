@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { IData, IDataCitation, IDataCitations, IDataComment, IDataComments, IDataPhoneUsers, ILogin, ILoginQrcode } from '../interfaces/general';
 import { Citation } from '../models/citation';
 import { Comment } from '../models/comment';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -72,5 +73,9 @@ export class ApiService extends BaseService {
 
   getGetPhoneUsers(): Observable<IDataPhoneUsers> {
     return this.http.get<IDataPhoneUsers>(`${this.baseUrl}/api/phone/users`, this.getHttpOptionsAuth());
+  }
+
+  postEditProfile(data:FormData): Observable<IData> {
+    return this.http.post<IData>(`${this.baseUrl}/api/edit-profile`, data, this.getHttpOptionsAuth(null, true));
   }
 }

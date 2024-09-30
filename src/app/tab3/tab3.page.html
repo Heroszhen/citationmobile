@@ -12,8 +12,60 @@
 <ion-content [fullscreen]="true">
   <section id="wrap-tab3" class="ion-padding" *ngIf="user !== null">
     <div class="ion-text-right">
-      <ion-icon name="menu-outline" (click)="presentActionSheet()" class="pointer"></ion-icon>
+      <ion-icon name="settings-outline" (click)="presentActionSheet()" class="pointer"></ion-icon>
     </div>
+
+    <section id="wrap-profile" *ngIf="user !== null && section === 1">
+      <div class="ion-text-center">
+        <ng-container *ngIf="[null, ''].includes(user.photo.url);else has_photo">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/User-Pict-Profil.svg/1200px-User-Pict-Profil.svg.png" alt="" id="photo-profile">
+        </ng-container>
+        <ng-template #has_photo>
+          <img src="{{user.photo.url}}" alt="" id="photo-profile">
+        </ng-template>
+        <br><br>
+        {{user.lastname}} {{user.firstname}}<br><br>
+        {{user.email}}<br><br>
+        Inscrivé(e) le {{user.created|date:'dd/MM/YYYY'}}
+      </div>
+    </section>
+    <section id="wrap-profile-form" *ngIf="section === 2">
+      <form #userform="ngForm" (ngSubmit)="editProfile()">
+        <h3 class="ion-text-center">Editer mon profil</h3>
+        <ion-list>
+          <ion-item lines="full">
+            <ion-input label="Mail*" labelPlacement="floating" placeholder="mail" name="email" [(ngModel)]="userM.email" email required></ion-input>
+          </ion-item>
+          <ion-item lines="full">
+            <ion-input label="Nom*" labelPlacement="floating" placeholder="nom" name="lastname" [(ngModel)]="userM.lastname" required></ion-input>
+          </ion-item>
+          <ion-item lines="full">
+            <ion-input label="Prénom*" labelPlacement="floating" placeholder="prénom" name="firstname" [(ngModel)]="userM.firstname" required></ion-input>
+          </ion-item>
+        </ion-list>
+
+        <div>
+          <ion-button shape="round" expand="block" color="secondary" (click)="inputFile.nativeElement.click()">
+            <ion-icon name="images-outline"></ion-icon>
+          </ion-button>
+          <input type="file" class="d-none" id="file-photo" accept="image/*" #inputfile (change)="handleFilePhoto($event.target)">
+          <ng-container *ngIf="photoUrl !== ''">
+            <img src="{{photoUrl}}">
+          </ng-container>
+        </div>
+
+        <ion-grid [fixed]="true" class="ion-margin-top">
+          <ion-row>
+            <ion-col>
+              <ion-button expand="full" type="submit" [disabled]="userform.form.invalid">Envoyer</ion-button>
+            </ion-col>
+            <ion-col>
+              <ion-button expand="full" type="button" color="medium" (click)="section=1">Retour</ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </form>
+    </section>
   </section>
   <section id="section-modal">
     <app-scanner-qrcode *ngIf="sectionModal===1" (sendCode)="ConfirmLoginQrcodeStatus($event)"></app-scanner-qrcode>

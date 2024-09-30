@@ -8,15 +8,17 @@ import { CloudPageRoutingModule } from './cloud-routing.module';
 
 import { CloudPage } from './cloud.page';
 import * as AWS from 'aws-sdk';
-import { SafePipe } from 'src/app/pipes/safe.pipe';
+// import { SafePipe } from 'src/app/pipes/safe.pipe';
+import { CommonPipeModule } from 'src/app/pipes/common-pipe.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CloudPageRoutingModule
+    CloudPageRoutingModule,
+    CommonPipeModule
   ],
-  declarations: [CloudPage, SafePipe]
+  declarations: [CloudPage]
 })
 export class CloudPageModule {}

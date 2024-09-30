@@ -11,8 +11,7 @@
   <section id="citation-editor" class="ion-padding">
     <section class="wrap-icons">
       <ion-icon name="image-outline" (click)="imageSection=true"></ion-icon>
-      <!-- *ngIf="platform !=='web'" -->
-      <ion-icon name="camera-reverse-outline"  (click)="openModalCamera()"></ion-icon>
+      <ion-icon name="camera-reverse-outline" *ngIf="platform !=='web'" (click)="openModalCamera()"></ion-icon>
       <ion-icon name="logo-youtube" (click)="videoSection=true"></ion-icon>
       <ion-icon name="happy-outline"></ion-icon>
       <ion-icon name="location-outline"></ion-icon>
@@ -22,10 +21,12 @@
   
       <section *ngIf="imageSection===true">
         <h4>Image</h4>
-        <ion-button shape="round" expand="block" color="secondary" (click)="inputFile.nativeElement.click()">
-          <ion-icon name="images-outline"></ion-icon>
-        </ion-button>
-        <input type="file" class="d-none" #inputfile (change)="handleFile($event.target)">
+        <div class="ion-margin-bottom">
+          <ion-button shape="round" expand="block" color="secondary" (click)="inputFile.nativeElement.click()">
+            <ion-icon name="images-outline"></ion-icon>
+          </ion-button>
+          <input type="file" class="d-none" #inputfile (change)="handleFile($event.target)" accept="image/*">
+        </div>
         <div *ngIf="fileUrl !== ''" class="ion-margin-top">
           <img src="{{fileUrl}}" alt="">
         </div>

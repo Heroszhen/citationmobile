@@ -1,5 +1,6 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { CommonPipeModule } from '../pipes/common-pipe.module';
 
 import { CitationComponent } from './citation/citation.component';
 import { EditorComponent } from './editor/editor.component';
@@ -22,7 +23,8 @@ import { ScannerQrcodeComponent } from './scanner-qrcode/scanner-qrcode.componen
   ],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    CommonPipeModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

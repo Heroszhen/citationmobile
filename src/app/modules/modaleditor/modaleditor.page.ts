@@ -43,6 +43,7 @@ export class ModaleditorPage implements OnInit {
   imageSection:boolean = false;
   videoSection:boolean = false;
   @ViewChild('inputfile') inputFile: ElementRef<HTMLInputElement>;
+  @ViewChild('inputcamerafile') inputCameraFile: ElementRef<HTMLInputElement>;
   platform:string = "";
   message:string = "";
   response:ICitation|null = null;
