@@ -1,4 +1,4 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" *ngIf="sectionModal === null">
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
@@ -10,7 +10,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <section id="wrap-tab3" class="ion-padding" *ngIf="user !== null">
+  <section id="wrap-tab3" class="ion-padding" *ngIf="user !== null && sectionModal === null">
     <div class="ion-text-right">
       <ion-icon name="settings-outline" (click)="presentActionSheet()" class="pointer"></ion-icon>
     </div>
@@ -67,7 +67,7 @@
       </form>
     </section>
   </section>
-  <section id="section-modal">
+  <!-- <section id="section-modal">
     <app-scanner-qrcode *ngIf="sectionModal===1" (sendCode)="ConfirmLoginQrcodeStatus($event)"></app-scanner-qrcode>
-  </section>
+  </section> -->
 </ion-content>

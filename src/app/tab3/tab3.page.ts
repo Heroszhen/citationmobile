@@ -86,7 +86,7 @@ export class Tab3Page {
   }
 
   async openScannerModal(): Promise<void> {
-    //this.sectionModal = 1;
+    this.sectionModal = 1;
     const modal = await this.modalCtrl.create({
       component: ScannerQrcodeComponent,
       componentProps: {
@@ -100,6 +100,7 @@ export class Tab3Page {
       this.apiService.postConfirmLoginQrcodeStatus({key:JSON.parse(data.content)['key']}).subscribe({});
       await Haptics.vibrate();
     }
+    this.sectionModal = null;
   }
 
   ConfirmLoginQrcodeStatus(event:string): void {
